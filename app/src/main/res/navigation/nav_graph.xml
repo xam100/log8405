@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/MenuFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.unlock.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
+        android:id="@+id/MenuFragment"
+        android:name="com.example.unlock.MenuFragment"
+        android:label="@string/menu_fragment_label"
+        tools:layout="@layout/fragment_menu">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/AboutFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_playFragment"
             app:destination="@id/play1Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.unlock.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second" >
+        android:id="@+id/AboutFragment"
+        android:name="com.example.unlock.AboutFragment"
+        android:label="@string/about_fragment_label"
+        tools:layout="@layout/fragment_about">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/MenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/play1Fragment"
@@ -38,7 +38,7 @@
             app:destination="@id/play2Fragment" />
         <action
             android:id="@+id/action_play1Fragment_to_FirstFragment2"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/MenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/play2Fragment"
@@ -53,7 +53,7 @@
             app:destination="@id/play1Fragment" />
         <action
             android:id="@+id/action_play2Fragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/MenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/play3Fragment"
@@ -65,6 +65,6 @@
             app:destination="@id/play2Fragment" />
         <action
             android:id="@+id/action_play3Fragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/MenuFragment" />
     </fragment>
 </navigation>

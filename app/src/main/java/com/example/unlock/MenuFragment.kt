@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.unlock.databinding.FragmentSecondBinding
+import com.example.unlock.databinding.FragmentMenuBinding
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class MenuFragment : Fragment() {
 
-private var _binding: FragmentSecondBinding? = null
+private var _binding: FragmentMenuBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -23,7 +23,7 @@ private var _binding: FragmentSecondBinding? = null
         savedInstanceState: Bundle?
     ): View? {
 
-      _binding = FragmentSecondBinding.inflate(inflater, container, false)
+      _binding = FragmentMenuBinding.inflate(inflater, container, false)
       return binding.root
 
     }
@@ -31,11 +31,19 @@ private var _binding: FragmentSecondBinding? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonAboutTohome.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        binding.buttonAbout.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
+        binding.buttonPlay.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_playFragment)
+        }
+
+        binding.buttonExit.setOnClickListener {
+            System.exit(0)
+        }
     }
+
 override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

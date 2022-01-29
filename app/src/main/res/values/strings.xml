@@ -2,8 +2,8 @@
     <string name="app_name">unLock</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Main Menu</string>
-    <string name="second_fragment_label">About</string>
+    <string name="menu_fragment_label">Main Menu</string>
+    <string name="about_fragment_label">About</string>
     <string name="play1_fragment_label">Play : Game 1</string>
     <string name="play2_fragment_label">Play : Game 2</string>
     <string name="play3_fragment_label">Play : Game 3</string>
@@ -14,7 +14,7 @@
     <string name="previous_game">Previous game</string>
     <string name="home">Home</string>
 
-    <string name="hello_first_fragment">Welcome to unLock</string>
-    <string name="hello_second_fragment">Prenom Nom\nPrenom Nom\nPrenom Nom\nPrenom Nom</string>
+    <string name="hello_menu_fragment">Welcome to unLock</string>
+    <string name="hello_about_fragment">Prenom Nom\nPrenom Nom\nPrenom Nom\nPrenom Nom</string>
 
 </resources>
