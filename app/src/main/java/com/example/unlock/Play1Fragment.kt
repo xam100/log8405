@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.unlock.databinding.FragmentPlay1Binding
 
+
 /**
  * A simple [Fragment] subclass as the Play destination in the navigation.
  */
@@ -43,6 +44,22 @@ class Play1Fragment : Fragment() {
             findNavController().navigate(R.id.action_play1Fragment_to_MenuFragment)
         }
 
+        binding.buttonMockPlay.setOnClickListener {
+            binding.currentMoves1.text = (binding.currentMoves1.text.toString().toInt()+1).toString()
+        }
+
+        binding.buttonUndo1.setOnClickListener {
+            binding.currentMoves1.text = (binding.currentMoves1.text.toString().toInt()-1).toString()
+        }
+
+        binding.buttonReset1.setOnClickListener {
+            binding.currentMoves1.text = (0).toString()
+        }
+
+        binding.buttonMockSetRecord.setOnClickListener {
+            //todo add condition to check that the the number of current moves is less that the current record and that it is indeed a record
+            binding.currentReccord1.text = binding.currentMoves1.text.toString()
+        }
 
     }
 

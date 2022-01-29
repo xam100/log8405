@@ -68,7 +68,7 @@
             app:layout_constraintTop_toTopOf="@+id/reccordLabel" />
 
         <Button
-            android:id="@+id/undo1"
+            android:id="@+id/button_undo1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/blue"
@@ -80,7 +80,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/reset1"
+            android:id="@+id/button_reset1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/blue"
@@ -88,7 +88,7 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/undo1"
+            app:layout_constraintStart_toEndOf="@+id/button_undo1"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
