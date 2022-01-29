@@ -40,7 +40,7 @@ class Play2Fragment : Fragment() {
         }
 
         binding.buttonPlay2home.setOnClickListener {
-            findNavController().navigate(R.id.action_play2Fragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_play2Fragment_to_MenuFragment)
         }
 
     }

@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_menu">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_MenuFragment_to_AboutFragment"
             app:destination="@id/AboutFragment" />
         <action
-            android:id="@+id/action_FirstFragment_to_playFragment"
+            android:id="@+id/action_MenuFragment_to_play1Fragment"
             app:destination="@id/play1Fragment" />
     </fragment>
     <fragment
@@ -25,7 +25,7 @@
         tools:layout="@layout/fragment_about">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_AboutFragment_to_MenuFragment"
             app:destination="@id/MenuFragment" />
     </fragment>
     <fragment
@@ -37,7 +37,7 @@
             android:id="@+id/action_play1Fragment_to_play2Fragment"
             app:destination="@id/play2Fragment" />
         <action
-            android:id="@+id/action_play1Fragment_to_FirstFragment2"
+            android:id="@+id/action_play1Fragment_to_MenuFragment"
             app:destination="@id/MenuFragment" />
     </fragment>
     <fragment
@@ -52,7 +52,7 @@
             android:id="@+id/action_play2Fragment_to_play1Fragment"
             app:destination="@id/play1Fragment" />
         <action
-            android:id="@+id/action_play2Fragment_to_FirstFragment"
+            android:id="@+id/action_play2Fragment_to_MenuFragment"
             app:destination="@id/MenuFragment" />
     </fragment>
     <fragment
@@ -64,7 +64,7 @@
             android:id="@+id/action_play3Fragment_to_play2Fragment"
             app:destination="@id/play2Fragment" />
         <action
-            android:id="@+id/action_play3Fragment_to_FirstFragment"
+            android:id="@+id/action_play3Fragment_to_MenuFragment"
             app:destination="@id/MenuFragment" />
     </fragment>
 </navigation>

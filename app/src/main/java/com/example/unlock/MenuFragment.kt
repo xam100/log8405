@@ -32,11 +32,11 @@ private var _binding: FragmentMenuBinding? = null
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonAbout.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_MenuFragment_to_AboutFragment)
         }
 
         binding.buttonPlay.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_playFragment)
+            findNavController().navigate(R.id.action_MenuFragment_to_play1Fragment)
         }
 
         binding.buttonExit.setOnClickListener {

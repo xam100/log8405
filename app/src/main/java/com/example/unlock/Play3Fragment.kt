@@ -36,7 +36,7 @@ class Play3Fragment : Fragment() {
         }
 
         binding.buttonGame3home.setOnClickListener {
-            findNavController().navigate(R.id.action_play3Fragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_play3Fragment_to_MenuFragment)
         }
 
     }

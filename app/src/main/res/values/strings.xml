@@ -4,9 +4,9 @@
     <!-- Strings used for fragments for navigation -->
     <string name="menu_fragment_label">Main Menu</string>
     <string name="about_fragment_label">About</string>
-    <string name="play1_fragment_label">Play : Game 1</string>
-    <string name="play2_fragment_label">Play : Game 2</string>
-    <string name="play3_fragment_label">Play : Game 3</string>
+    <string name="play1_fragment_label">Puzzle 1</string>
+    <string name="play2_fragment_label">Puzzle 2</string>
+    <string name="play3_fragment_label">Puzzel 3</string>
     <string name="about">About</string>
     <string name="play">Play</string>
     <string name="exit">Exit</string>

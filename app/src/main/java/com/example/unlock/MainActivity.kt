@@ -1,16 +1,13 @@
 package com.example.unlock
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toolbar
-import androidx.appcompat.app.ActionBar
+
 import com.example.unlock.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

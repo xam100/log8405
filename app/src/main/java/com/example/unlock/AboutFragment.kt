@@ -32,7 +32,7 @@ private var _binding: FragmentAboutBinding? = null
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonAboutTohome.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_AboutFragment_to_MenuFragment)
         }
 
     }
