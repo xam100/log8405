@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.unlock.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first" >
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_playFragment"
+            app:destination="@id/play1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.unlock.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second" >
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/play1Fragment"
+        android:name="com.example.unlock.Play1Fragment"
+        android:label="@string/play1_fragment_label"
+        tools:layout="@layout/fragment_play1" >
+        <action
+            android:id="@+id/action_play1Fragment_to_play2Fragment"
+            app:destination="@id/play2Fragment" />
+        <action
+            android:id="@+id/action_play1Fragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/play2Fragment"
+        android:name="com.example.unlock.Play2Fragment"
+        android:label="@string/play2_fragment_label"
+        tools:layout="@layout/fragment_play2">
+        <action
+            android:id="@+id/action_play2Fragment_to_play3Fragment"
+            app:destination="@id/play3Fragment" />
+        <action
+            android:id="@+id/action_play2Fragment_to_play1Fragment"
+            app:destination="@id/play1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/play3Fragment"
+        android:name="com.example.unlock.Play3Fragment"
+        android:label="@string/play3_fragment_label"
+        tools:layout="@layout/fragment_play3">
+        <action
+            android:id="@+id/action_play3Fragment_to_play2Fragment"
+            app:destination="@id/play2Fragment" />
+    </fragment>
+</navigation>
