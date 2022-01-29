@@ -34,6 +34,10 @@ class Play1Fragment : Fragment() {
         binding.buttonGame1to2.setOnClickListener {
             findNavController().navigate(R.id.action_play1Fragment_to_play2Fragment)
         }
+
+        binding.buttonPlay1home.setOnClickListener {
+            findNavController().navigate(R.id.action_play1Fragment_to_FirstFragment2)
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

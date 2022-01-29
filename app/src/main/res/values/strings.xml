@@ -12,6 +12,7 @@
     <string name="exit">Exit</string>
     <string name="next_game">Next game</string>
     <string name="previous_game">Previous game</string>
+    <string name="home">Home</string>
 
     <string name="hello_first_fragment">Welcome to unLock</string>
     <string name="hello_second_fragment">Prenom Nom\nPrenom Nom\nPrenom Nom\nPrenom Nom</string>

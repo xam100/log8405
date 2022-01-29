@@ -37,7 +37,7 @@
             android:id="@+id/action_play1Fragment_to_play2Fragment"
             app:destination="@id/play2Fragment" />
         <action
-            android:id="@+id/action_play1Fragment_to_FirstFragment"
+            android:id="@+id/action_play1Fragment_to_FirstFragment2"
             app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_play2Fragment_to_play1Fragment"
             app:destination="@id/play1Fragment" />
+        <action
+            android:id="@+id/action_play2Fragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
         android:id="@+id/play3Fragment"
@@ -60,5 +63,8 @@
         <action
             android:id="@+id/action_play3Fragment_to_play2Fragment"
             app:destination="@id/play2Fragment" />
+        <action
+            android:id="@+id/action_play3Fragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
