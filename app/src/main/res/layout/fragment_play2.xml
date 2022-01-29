@@ -6,6 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".Play2Fragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/movesUI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_play2home">
+
+        <TextView
+            android:id="@+id/movesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/moves"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/currentMoves1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/current_moves"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/movesLabel"
+            app:layout_constraintTop_toTopOf="@+id/movesLabel" />
+
+        <TextView
+            android:id="@+id/reccordLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/record"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/movesLabel"
+            app:layout_constraintTop_toBottomOf="@+id/movesLabel" />
+
+        <TextView
+            android:id="@+id/currentReccord1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/current_record"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/reccordLabel"
+            app:layout_constraintTop_toTopOf="@+id/reccordLabel" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/move_15"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/currentReccord1"
+            app:layout_constraintTop_toTopOf="@+id/reccordLabel" />
+
+        <Button
+            android:id="@+id/undo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:text="@string/undo"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/reset1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:text="@string/reset"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/undo1"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -20,31 +106,29 @@
         android:id="@+id/button_game2to3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
         android:background="@color/blue"
         android:text="@string/next_game"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/button_play2home"
+        app:layout_constraintTop_toTopOf="@+id/button_play2home" />
 
     <Button
         android:id="@+id/button_game2to1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:background="@color/blue"
         android:text="@string/previous_game"
         android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/button_play2home"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/button_play2home" />
 
     <Button
         android:id="@+id/button_play2home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:background="@color/blue"
         android:text="@string/home"
         android:textColor="@color/white"

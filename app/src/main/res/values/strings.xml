@@ -10,9 +10,18 @@
     <string name="about">About</string>
     <string name="play">Play</string>
     <string name="exit">Exit</string>
-    <string name="next_game">Next game</string>
-    <string name="previous_game">Previous game</string>
+    <string name="next_game">Next</string>
+    <string name="previous_game">Previous</string>
     <string name="home">Home</string>
+
+    <string name="moves">Moves:</string>
+    <string name="current_moves">0</string>
+    <string name="record">Record:</string>
+    <string name="current_record">--</string>
+    <string name="move_15">/15</string>
+    <string name="move_17">/17</string>
+    <string name="reset">reset</string>
+    <string name="undo">undo</string>
 
     <string name="hello_menu_fragment">Welcome to unLock</string>
     <string name="hello_about_fragment">Prenom Nom\nPrenom Nom\nPrenom Nom\nPrenom Nom</string>
