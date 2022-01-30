@@ -6,15 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Play1Fragment">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" Game 1 Fragment (temp  hardcoded text)"
+    <view
+        android:id="@+id/view2"
+        class="com.example.unlock.BoardFragment$Drawer"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_weight="1"
+        android:background="#00f"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/movesUI" />
 
     <Button
         android:id="@+id/button_game1to2"
@@ -43,19 +46,20 @@
         android:id="@+id/button_mock_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="Mock Play"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/button_mock_set_record"
+        app:layout_constraintTop_toTopOf="@+id/button_mock_set_record" />
 
     <Button
         android:id="@+id/button_mock_set_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:text="Mock Set Record"
-        app:layout_constraintBottom_toTopOf="@+id/button_mock_play"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movesUI" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/movesUI"

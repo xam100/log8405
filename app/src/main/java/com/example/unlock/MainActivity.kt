@@ -24,7 +24,7 @@ private lateinit var binding: ActivityMainBinding
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.MenuFragment,R.id.AboutFragment,R.id.play1Fragment,R.id.play2Fragment,R.id.play3Fragment,))
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.MenuFragment,R.id.AboutFragment,R.id.play1Fragment,R.id.play2Fragment,R.id.play3Fragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
 
     }
