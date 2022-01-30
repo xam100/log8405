@@ -10,19 +10,45 @@ class GridManager(var blockSize: PointF) {
     private var grabbed: Boolean = false
     private var grabbedPosition: PointF = PointF(0f, 0f)
     private var currentRectangle: Rectangle? = null
+    private var actions: MutableList<GridCommand> =  ArrayList()
 
     private var rectangles: Array<Array<Rectangle?>> =
         Array(6){arrayOfNulls<Rectangle?>(6)}
 
+    fun undo() {
+        rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
+
+        if (actions.count() < 1)
+            return
+
+        actions.pop()
+
+        if (actions[actions.count() - 1].rectangle == null)
+            actions.pop()
+
+        for (action in actions) {
+            action.exec(rectangles)
+        }
+    }
+
+    private fun addCommand(position: Point,
+                           dimensions: Point,
+                           rectangle: Rectangle?) {
+        val gridCommand: GridCommand = GridCommand(position, dimensions, rectangle)
+        gridCommand.exec(rectangles)
+        actions += gridCommand
+    }
+
     fun addRectangle(position: Point,
                      dimensions: Point, stuck: Boolean = false) {
         val rectangle: Rectangle = Rectangle(position, dimensions, blockSize)
-        addRemoveRectangle(position, dimensions, rectangle)
+        addCommand(position, dimensions, rectangle)
     }
 
     private fun addRemoveRectangle(position: Point,
                                    dimensions: Point,
-                                   rectangle: Rectangle?) {
+                                   rectangle: Rectangle?,
+                                   rectangles: Array<Array<Rectangle?>>) {
         if (dimensions.x > dimensions.y) {
             val range : Int = dimensions.x - 1
             for (i in 0..range) {
@@ -64,7 +90,7 @@ class GridManager(var blockSize: PointF) {
         val gridIndex: Point =
             Point(indexX.coerceIn(0..maxX),
                 indexY.coerceIn(0..maxY))
-        addRemoveRectangle(currentRectangle!!.gridIndex, gridDimensions, null)
+        addCommand(currentRectangle!!.gridIndex, gridDimensions, null)
         addRectangle(gridIndex, gridDimensions)
 
         currentRectangle = null
@@ -177,16 +203,39 @@ class GridManager(var blockSize: PointF) {
         rectangles[gridIndex.x][gridIndex.y]?.redraw(canvasPosition, canvas, paint)
     }
 
-    class Rectangle(index: Point,
-                    gridDims: Point,
+    class GridCommand(private val position: Point,
+                      private val dimensions: Point,
+                      val rectangle: Rectangle?) {
+
+
+        private fun addRemoveRectangle(rectangles: Array<Array<Rectangle?>>) {
+            if (dimensions.x > dimensions.y) {
+                val range : Int = dimensions.x - 1
+                for (i in 0..range) {
+                    rectangles[position.x + i][position.y] = rectangle
+                }
+            } else {
+                val range : Int = dimensions.y - 1
+                for (i in 0..range) {
+                    rectangles[position.x][position.y + i] = rectangle
+                }
+            }
+        }
+
+        fun exec(rectangles: Array<Array<Rectangle?>>) {
+            println("rectangle: " + rectangle == null)
+            addRemoveRectangle(rectangles)
+        }
+    }
+
+    class Rectangle(val gridIndex: Point,
+                    val gridDimensions: Point,
                     bSize: PointF) {
 
-        var gridIndex: Point = Point(index)
         private val blockSize: PointF = PointF(bSize.x, bSize.y)
 
-        val gridDimensions: Point = gridDims
-        val canvasDimensions: PointF = gridDims * blockSize
-        var canvasPosition: PointF = index * blockSize
+        val canvasDimensions: PointF = gridDimensions * blockSize
+        var canvasPosition: PointF = gridIndex * blockSize
 
         private var right: Float = canvasPosition.x + canvasDimensions.x
         private var bottom: Float = canvasPosition.y + canvasDimensions.y
@@ -222,3 +271,8 @@ private operator fun PointF.div(pointF: PointF): Point {
 private operator fun PointF.div(blockWidth: Float): Point {
     return Point((x / blockWidth).toInt(), (y / blockWidth).toInt())
 }
+
+fun <T> MutableList<T>.push(item: T) = this.add(this.count(), item)
+fun <T> MutableList<T>.pop(): T? = if(this.count() > 0) this.removeAt(this.count() - 1) else null
+fun <T> MutableList<T>.peek(): T? = if(this.count() > 0) this[this.count() - 1] else null
+fun <T> MutableList<T>.hasMore() = this.count() > 0
