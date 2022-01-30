@@ -7,6 +7,7 @@ import kotlin.math.roundToInt
 
 class GridManager(var blockSize: PointF) {
 
+    var moves: Int = 0
     private var grabbed: Boolean = false
     private var grabbedPosition: PointF = PointF(0f, 0f)
     private var currentRectangle: Rectangle? = null
@@ -29,20 +30,30 @@ class GridManager(var blockSize: PointF) {
         for (action in actions) {
             action.exec(rectangles)
         }
+
+        moves--
     }
 
     private fun addCommand(position: Point,
                            dimensions: Point,
-                           rectangle: Rectangle?) {
+                           rectangle: Rectangle?,
+                           fromUser: Boolean = false) {
         val gridCommand: GridCommand = GridCommand(position, dimensions, rectangle)
         gridCommand.exec(rectangles)
         actions += gridCommand
+
+        if(fromUser && rectangle != null) {
+            moves++
+            println("moves" + moves)
+        }
     }
 
     fun addRectangle(position: Point,
-                     dimensions: Point, stuck: Boolean = false) {
+                     dimensions: Point,
+                     stuck: Boolean = false,
+                     fromUser: Boolean = false) {
         val rectangle: Rectangle = Rectangle(position, dimensions, blockSize)
-        addCommand(position, dimensions, rectangle)
+        addCommand(position, dimensions, rectangle, fromUser)
     }
 
     private fun addRemoveRectangle(position: Point,
@@ -90,8 +101,15 @@ class GridManager(var blockSize: PointF) {
         val gridIndex: Point =
             Point(indexX.coerceIn(0..maxX),
                 indexY.coerceIn(0..maxY))
-        addCommand(currentRectangle!!.gridIndex, gridDimensions, null)
-        addRectangle(gridIndex, gridDimensions)
+
+        if(rectangles[gridIndex.x][gridIndex.y] != null &&
+           rectangles[gridIndex.x][gridIndex.y]!!.gridIndex == gridIndex) {
+            currentRectangle = null
+            return
+        }
+
+        addCommand(currentRectangle!!.gridIndex, gridDimensions, null, fromUser = true)
+        addRectangle(gridIndex, gridDimensions, fromUser = true)
 
         currentRectangle = null
     }
@@ -223,7 +241,6 @@ class GridManager(var blockSize: PointF) {
         }
 
         fun exec(rectangles: Array<Array<Rectangle?>>) {
-            println("rectangle: " + rectangle == null)
             addRemoveRectangle(rectangles)
         }
     }
