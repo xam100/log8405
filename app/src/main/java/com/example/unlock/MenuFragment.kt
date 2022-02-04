@@ -31,6 +31,11 @@ private var _binding: FragmentMenuBinding? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.buttonPopup.setOnClickListener{
+            val popUpClass = Success()
+            popUpClass.showPopupWindow(view)
+        }
+
         binding.buttonAbout.setOnClickListener {
             findNavController().navigate(R.id.action_MenuFragment_to_AboutFragment)
         }
