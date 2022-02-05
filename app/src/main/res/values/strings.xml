@@ -6,7 +6,7 @@
     <string name="about_fragment_label">About</string>
     <string name="play1_fragment_label">Puzzle 1</string>
     <string name="play2_fragment_label">Puzzle 2</string>
-    <string name="play3_fragment_label">Puzzel 3</string>
+    <string name="play3_fragment_label">Puzzle 3</string>
     <string name="about">About</string>
     <string name="play">Play</string>
     <string name="exit">Exit</string>

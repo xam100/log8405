@@ -7,10 +7,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
-
 import com.example.unlock.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.MenuFragment,R.id.AboutFragment,R.id.play1Fragment,R.id.play2Fragment,R.id.play3Fragment))
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.MenuFragment,R.id.AboutFragment,R.id.play1Fragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
 
     }

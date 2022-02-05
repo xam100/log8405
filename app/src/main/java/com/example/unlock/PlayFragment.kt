@@ -1,5 +1,6 @@
 package com.example.unlock
 
+import android.graphics.Point
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -11,10 +12,11 @@ import com.example.unlock.databinding.FragmentPlay1Binding
 /**
  * A simple [Fragment] subclass as the Play destination in the navigation.
  */
-class Play1Fragment : Fragment(R.layout.fragment_play1) {
+class PlayFragment : Fragment(R.layout.fragment_play1) {
 
     private var _binding: FragmentPlay1Binding? = null
     private val viewModel: MainViewModel by viewModels()
+    private var currentPuzzleNumber: Int = 1
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -45,7 +47,7 @@ class Play1Fragment : Fragment(R.layout.fragment_play1) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonGame1to2.setOnClickListener {
-            findNavController().navigate(R.id.action_play1Fragment_to_play2Fragment)
+            //todo
         }
 
         binding.buttonPlay1home.setOnClickListener {
@@ -61,10 +63,8 @@ class Play1Fragment : Fragment(R.layout.fragment_play1) {
         }
 
         binding.buttonReset1.setOnClickListener {
-            //binding.currentMoves1.text = (0).toString()
-            //GridManagerObject.deleteActions()
-            //binding.currentMoves1.text = GridManagerObject.moves.toString()
-
+            GridManagerObject.deleteActions()
+            loadPuzzle(1)
         }
 
         binding.buttonMockSetRecord.setOnClickListener {
@@ -80,5 +80,21 @@ class Play1Fragment : Fragment(R.layout.fragment_play1) {
         super.onDestroyView()
         GridManagerObject.deleteActions()
         _binding = null
+    }
+
+    private fun loadPuzzle(puzzleNumber: Int){
+        when (puzzleNumber) {
+            1 -> {
+                currentPuzzleNumber = 1
+                GridManagerObject.addRectangle(Point(0, 0), Point(3, 1))
+                GridManagerObject.addRectangle(Point(0, 2), Point(2, 1), stuck = true)
+                GridManagerObject.addRectangle(Point(0, 3), Point(1, 2))
+                GridManagerObject.addRectangle(Point(0, 5), Point(3, 1))
+                GridManagerObject.addRectangle(Point(2, 1), Point(1, 3))
+                GridManagerObject.addRectangle(Point(5, 0), Point(1, 3))
+                GridManagerObject.addRectangle(Point(4, 3), Point(2, 1))
+                GridManagerObject.addRectangle(Point(4, 4), Point(1, 2))
+            }
+        }
     }
 }
