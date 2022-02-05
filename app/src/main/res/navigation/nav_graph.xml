@@ -16,7 +16,7 @@
             app:destination="@id/AboutFragment" />
         <action
             android:id="@+id/action_MenuFragment_to_play1Fragment"
-            app:destination="@id/play1Fragment" />
+            app:destination="@id/playFragment" />
     </fragment>
     <fragment
         android:id="@+id/AboutFragment"
@@ -29,10 +29,10 @@
             app:destination="@id/MenuFragment" />
     </fragment>
     <fragment
-        android:id="@+id/play1Fragment"
+        android:id="@+id/playFragment"
         android:name="com.example.unlock.PlayFragment"
-        android:label="@string/play1_fragment_label"
-        tools:layout="@layout/fragment_play1" >
+        android:label="@string/puzzle1ToolbarTittle"
+        tools:layout="@layout/fragment_play">
         <action
             android:id="@+id/action_play1Fragment_to_MenuFragment"
             app:destination="@id/MenuFragment" />

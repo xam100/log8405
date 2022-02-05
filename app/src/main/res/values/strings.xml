@@ -2,14 +2,14 @@
     <string name="app_name">unLock</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="menu_fragment_label">Main Menu</string>
-    <string name="about_fragment_label">About</string>
-    <string name="play1_fragment_label">Puzzle 1</string>
-    <string name="play2_fragment_label">Puzzle 2</string>
-    <string name="play3_fragment_label">Puzzle 3</string>
-    <string name="about">About</string>
-    <string name="play">Play</string>
-    <string name="exit">Exit</string>
+    <string name="menu_fragment_label">MAIN MENU</string>
+    <string name="about_fragment_label">ABOUT</string>
+    <string name="puzzle1ToolbarTittle">PUZZLE 1</string>
+    <string name="puzzle2ToolbarTittle">PUZZLE 2</string>
+    <string name="puzzle3ToolbarTittle">PUZZLE 3</string>
+    <string name="about">ABOUT</string>
+    <string name="play">PLAY</string>
+    <string name="exit">EXIT</string>
     <string name="next_game">Next</string>
     <string name="previous_game">Previous</string>
     <string name="home">Home</string>

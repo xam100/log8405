@@ -1,20 +1,22 @@
 package com.example.unlock
 
+import android.graphics.Color
 import android.graphics.Point
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.unlock.databinding.FragmentPlay1Binding
+import com.example.unlock.databinding.FragmentPlayBinding
 
 
 /**
  * A simple [Fragment] subclass as the Play destination in the navigation.
  */
-class PlayFragment : Fragment(R.layout.fragment_play1) {
+class PlayFragment : Fragment(R.layout.fragment_play) {
 
-    private var _binding: FragmentPlay1Binding? = null
+    private var _binding: FragmentPlayBinding? = null
     private val viewModel: MainViewModel by viewModels()
     private var currentPuzzleNumber: Int = 1
 
@@ -34,23 +36,23 @@ class PlayFragment : Fragment(R.layout.fragment_play1) {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentPlay1Binding.inflate(inflater, container, false)
+        _binding = FragmentPlayBinding.inflate(inflater, container, false)
 
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
+        loadPuzzle(currentPuzzleNumber)
         return binding.root
-
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonGame1to2.setOnClickListener {
+        binding.buttonNext.setOnClickListener {
             //todo
         }
 
-        binding.buttonPlay1home.setOnClickListener {
+        binding.buttonHome.setOnClickListener {
             findNavController().navigate(R.id.action_play1Fragment_to_MenuFragment)
         }
 
@@ -58,11 +60,11 @@ class PlayFragment : Fragment(R.layout.fragment_play1) {
             //binding.currentMoves1.text = (binding.currentMoves1.text.toString().toInt()+1).toString()
         }
 
-        binding.buttonUndo1.setOnClickListener {
+        binding.buttonUndo.setOnClickListener {
             GridManagerObject.undo()
         }
 
-        binding.buttonReset1.setOnClickListener {
+        binding.buttonReset.setOnClickListener {
             GridManagerObject.deleteActions()
             loadPuzzle(1)
         }
@@ -86,6 +88,9 @@ class PlayFragment : Fragment(R.layout.fragment_play1) {
         when (puzzleNumber) {
             1 -> {
                 currentPuzzleNumber = 1
+                binding.toolbarPlayTitle.text = "PUZZLE 1"
+                binding.buttonPrevious.setBackgroundColor(Color.GRAY)
+                binding.buttonPrevious.isClickable = false
                 GridManagerObject.addRectangle(Point(0, 0), Point(3, 1))
                 GridManagerObject.addRectangle(Point(0, 2), Point(2, 1), stuck = true)
                 GridManagerObject.addRectangle(Point(0, 3), Point(1, 2))

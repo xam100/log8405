@@ -27,27 +27,39 @@
             app:layout_constraintTop_toBottomOf="@+id/movesUI" />
 
         <Button
-            android:id="@+id/button_game1to2"
+            android:id="@+id/button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/blue"
             android:text="@string/next_game"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_play1home"
-            app:layout_constraintTop_toTopOf="@+id/button_play1home" />
+            app:layout_constraintStart_toEndOf="@+id/button_home"
+            app:layout_constraintTop_toTopOf="@+id/button_home" />
 
         <Button
-            android:id="@+id/button_play1home"
+            android:id="@+id/button_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:background="@color/blue"
+            android:text="@string/previous_game"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/button_home"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/button_home" />
+
+        <Button
+            android:id="@+id/button_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@color/blue"
             android:text="@string/home"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbarPlay" />
 
         <Button
             android:id="@+id/button_mock_play"
@@ -73,9 +85,11 @@
             android:id="@+id/movesUI"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_play1home">
+            app:layout_constraintTop_toBottomOf="@+id/button_home">
 
             <TextView
                 android:id="@+id/movesLabel"
@@ -132,7 +146,7 @@
                 app:layout_constraintTop_toTopOf="@+id/reccordLabel" />
 
             <Button
-                android:id="@+id/button_undo1"
+                android:id="@+id/button_undo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
@@ -144,7 +158,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button_reset1"
+                android:id="@+id/button_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
@@ -152,9 +166,33 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button_undo1"
+                app:layout_constraintStart_toEndOf="@+id/button_undo"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarPlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/toolbarPlayTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/puzzle1ToolbarTittle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarPlay"
+            app:layout_constraintEnd_toEndOf="@+id/toolbarPlay"
+            app:layout_constraintStart_toStartOf="@+id/toolbarPlay"
+            app:layout_constraintTop_toTopOf="@+id/toolbarPlay" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
