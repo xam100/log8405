@@ -6,11 +6,16 @@ import android.graphics.Point
 import android.graphics.PointF
 import androidx.core.graphics.minus
 import androidx.core.graphics.plus
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlin.math.roundToInt
 
 object GridManagerObject {
     var blockSize: PointF = PointF(1f, 1f)
-    var moves: Int = 0
+    private val _moves: MutableLiveData<Int> = MutableLiveData<Int>()
+    val test: LiveData<Int>
+        get() = _moves
+
     private var grabbed: Boolean = false
     private var grabbedPosition: PointF = PointF(0f, 0f)
     private var currentRectangle: Rectangle? = null
@@ -19,8 +24,12 @@ object GridManagerObject {
     private var rectangles: Array<Array<Rectangle?>> =
         Array(6){arrayOfNulls<Rectangle?>(6)}
 
+    init {
+        _moves.value = 0
+    }
+
     fun undo() {
-        if (actions.count() < 1 || moves == 0)
+        if (actions.count() < 1 || _moves.value == 0)
             return
 
         rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
@@ -33,13 +42,13 @@ object GridManagerObject {
         for (action in actions) {
             action.exec(rectangles)
         }
-        moves--
+        _moves.value = _moves.value!!.toInt() - 1
     }
 
     fun deleteActions(){
         rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
         actions.clear()
-        moves = 0
+        _moves.value = 0
     }
 
     private fun addCommand(position: Point,
@@ -51,8 +60,7 @@ object GridManagerObject {
         actions += gridCommand
 
         if(fromUser && rectangle != null) {
-            moves++
-            println("moves" + moves)
+            _moves.value = _moves.value!!.toInt() + 1
         }
     }
 

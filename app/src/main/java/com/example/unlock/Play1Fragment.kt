@@ -3,6 +3,7 @@ package com.example.unlock
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.unlock.databinding.FragmentPlay1Binding
 
@@ -10,9 +11,11 @@ import com.example.unlock.databinding.FragmentPlay1Binding
 /**
  * A simple [Fragment] subclass as the Play destination in the navigation.
  */
-class Play1Fragment : Fragment() {
+class Play1Fragment : Fragment(R.layout.fragment_play1) {
 
     private var _binding: FragmentPlay1Binding? = null
+    private val viewModel: MainViewModel by viewModels()
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -21,6 +24,7 @@ class Play1Fragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -30,7 +34,8 @@ class Play1Fragment : Fragment() {
 
         _binding = FragmentPlay1Binding.inflate(inflater, container, false)
 
-        binding.movesZ = GridManagerObject.moves.toString()
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
         return binding.root
 
     }
@@ -49,7 +54,6 @@ class Play1Fragment : Fragment() {
 
         binding.buttonMockPlay.setOnClickListener {
             //binding.currentMoves1.text = (binding.currentMoves1.text.toString().toInt()+1).toString()
-            binding.currentMoves1.text = GridManagerObject.moves.toString()
         }
 
         binding.buttonUndo1.setOnClickListener {
