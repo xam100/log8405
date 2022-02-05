@@ -19,6 +19,7 @@ class Play1Fragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setHasOptionsMenu(true)
     }
 
@@ -28,6 +29,8 @@ class Play1Fragment : Fragment() {
     ): View? {
 
         _binding = FragmentPlay1Binding.inflate(inflater, container, false)
+
+        binding.movesZ = GridManagerObject.moves.toString()
         return binding.root
 
     }
@@ -35,8 +38,6 @@ class Play1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.currentMoves1.apply { text = GridManagerObject.moves.toString() }
 
         binding.buttonGame1to2.setOnClickListener {
             findNavController().navigate(R.id.action_play1Fragment_to_play2Fragment)
@@ -47,7 +48,8 @@ class Play1Fragment : Fragment() {
         }
 
         binding.buttonMockPlay.setOnClickListener {
-            binding.currentMoves1.text = (binding.currentMoves1.text.toString().toInt()+1).toString()
+            //binding.currentMoves1.text = (binding.currentMoves1.text.toString().toInt()+1).toString()
+            binding.currentMoves1.text = GridManagerObject.moves.toString()
         }
 
         binding.buttonUndo1.setOnClickListener {
@@ -57,7 +59,8 @@ class Play1Fragment : Fragment() {
         binding.buttonReset1.setOnClickListener {
             //binding.currentMoves1.text = (0).toString()
             //GridManagerObject.deleteActions()
-            binding.currentMoves1.text = GridManagerObject.moves.toString()
+            //binding.currentMoves1.text = GridManagerObject.moves.toString()
+
         }
 
         binding.buttonMockSetRecord.setOnClickListener {

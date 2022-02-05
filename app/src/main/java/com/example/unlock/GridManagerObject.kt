@@ -33,13 +33,13 @@ object GridManagerObject {
         for (action in actions) {
             action.exec(rectangles)
         }
-
         moves--
     }
 
     fun deleteActions(){
         rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
         actions.clear()
+        moves = 0
     }
 
     private fun addCommand(position: Point,

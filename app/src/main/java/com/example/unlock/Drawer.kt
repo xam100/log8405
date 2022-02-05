@@ -8,9 +8,8 @@ import android.view.View
 
 //data class Position (var x: Float, var y: Float)
 
-class BoardClass {
+class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
 
-    class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
         private val paint:Paint = Paint()
         init {
             paint.isFilterBitmap = true
@@ -70,4 +69,4 @@ class BoardClass {
             return true
         }
     }
-}
+
