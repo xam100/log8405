@@ -49,7 +49,7 @@ class Play1Fragment : Fragment() {
         }
 
         binding.buttonUndo1.setOnClickListener {
-            binding.currentMoves1.text = (binding.currentMoves1.text.toString().toInt()-1).toString()
+            GridManagerObject.undo()
         }
 
         binding.buttonReset1.setOnClickListener {
@@ -62,6 +62,8 @@ class Play1Fragment : Fragment() {
         }
 
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

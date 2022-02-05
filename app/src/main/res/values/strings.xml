@@ -13,6 +13,7 @@
     <string name="next_game">Next</string>
     <string name="previous_game">Previous</string>
     <string name="home">Home</string>
+    <string name="textTitle">POPUP</string>
 
     <string name="moves">Moves:</string>
     <string name="current_moves">0</string>

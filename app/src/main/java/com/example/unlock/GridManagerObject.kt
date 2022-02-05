@@ -1,16 +1,14 @@
 package com.example.unlock
 
-import android.content.Context
-import android.graphics.*
-import android.util.AttributeSet
-import android.view.MotionEvent
-import android.view.View
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Point
+import android.graphics.PointF
 import androidx.core.graphics.minus
 import androidx.core.graphics.plus
 import kotlin.math.roundToInt
 
-class GridManager() {
-
+object GridManagerObject {
     var blockSize: PointF = PointF(1f, 1f)
     var moves: Int = 0
     private var grabbed: Boolean = false
@@ -108,7 +106,7 @@ class GridManager() {
                 indexY.coerceIn(0..maxY))
 
         if(rectangles[gridIndex.x][gridIndex.y] != null &&
-           rectangles[gridIndex.x][gridIndex.y]!!.gridIndex == gridIndex) {
+            rectangles[gridIndex.x][gridIndex.y]!!.gridIndex == gridIndex) {
             currentRectangle = null
             return
         }
@@ -215,7 +213,8 @@ class GridManager() {
     private fun updateRectangle(gridIndex: Point,
                                 canvasPosition: PointF,
                                 canvas: Canvas?,
-                                paint: Paint) {
+                                paint: Paint
+    ) {
         for (row in rectangles) {
             for (rectangle in row) {
                 if ((rectangle?.gridIndex != gridIndex)) {
@@ -252,7 +251,8 @@ class GridManager() {
 
     class Rectangle(val gridIndex: Point,
                     val gridDimensions: Point,
-                    bSize: PointF) {
+                    bSize: PointF
+    ) {
 
         private val blockSize: PointF = PointF(bSize.x, bSize.y)
 
@@ -294,3 +294,7 @@ private operator fun PointF.div(blockWidth: Float): Point {
     return Point((x / blockWidth).toInt(), (y / blockWidth).toInt())
 }
 
+fun <T> MutableList<T>.push(item: T) = this.add(this.count(), item)
+fun <T> MutableList<T>.pop(): T? = if(this.count() > 0) this.removeAt(this.count() - 1) else null
+fun <T> MutableList<T>.peek(): T? = if(this.count() > 0) this[this.count() - 1] else null
+fun <T> MutableList<T>.hasMore() = this.count() > 0

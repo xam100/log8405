@@ -7,8 +7,8 @@
     tools:context=".Play1Fragment">
 
     <view
-        android:id="@+id/view2"
-        class="com.example.unlock.BoardFragment$Drawer"
+        android:id="@+id/boardView"
+        class="com.example.unlock.BoardClass$Drawer"
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:layout_weight="1"
