@@ -20,10 +20,10 @@ object GridManagerObject {
         Array(6){arrayOfNulls<Rectangle?>(6)}
 
     fun undo() {
-        rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
-
-        if (actions.count() < 1)
+        if (actions.count() < 1 || moves == 0)
             return
+
+        rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
 
         actions.pop()
 
@@ -35,6 +35,11 @@ object GridManagerObject {
         }
 
         moves--
+    }
+
+    fun deleteActions(){
+        rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
+        actions.clear()
     }
 
     private fun addCommand(position: Point,

@@ -46,6 +46,7 @@ class BoardClass {
                 gridManager.moveTo(position, canvas, paint)
             else
                 gridManager.redrawRectangles(canvas, paint)
+            invalidate()
         }
 
         override fun onTouchEvent(event: MotionEvent?): Boolean {

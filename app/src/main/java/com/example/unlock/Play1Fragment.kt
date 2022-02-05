@@ -36,6 +36,8 @@ class Play1Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.currentMoves1.apply { text = GridManagerObject.moves.toString() }
+
         binding.buttonGame1to2.setOnClickListener {
             findNavController().navigate(R.id.action_play1Fragment_to_play2Fragment)
         }
@@ -53,7 +55,9 @@ class Play1Fragment : Fragment() {
         }
 
         binding.buttonReset1.setOnClickListener {
-            binding.currentMoves1.text = (0).toString()
+            //binding.currentMoves1.text = (0).toString()
+            //GridManagerObject.deleteActions()
+            binding.currentMoves1.text = GridManagerObject.moves.toString()
         }
 
         binding.buttonMockSetRecord.setOnClickListener {
@@ -67,6 +71,7 @@ class Play1Fragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        GridManagerObject.deleteActions()
         _binding = null
     }
 }
