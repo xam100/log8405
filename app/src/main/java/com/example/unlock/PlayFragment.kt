@@ -49,7 +49,17 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonNext.setOnClickListener {
-            //todo
+            when (currentPuzzleNumber){
+                1 -> loadPuzzle(2)
+                2 -> loadPuzzle(3)
+            }
+        }
+
+        binding.buttonPrevious.setOnClickListener {
+            when (currentPuzzleNumber){
+                2 -> loadPuzzle(1)
+                3 -> loadPuzzle(2)
+            }
         }
 
         binding.buttonHome.setOnClickListener {
@@ -66,7 +76,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
         binding.buttonReset.setOnClickListener {
             GridManagerObject.deleteActions()
-            loadPuzzle(1)
+            loadPuzzle(2)
         }
 
         binding.buttonMockSetRecord.setOnClickListener {
@@ -89,8 +99,10 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             1 -> {
                 currentPuzzleNumber = 1
                 binding.toolbarPlayTitle.text = "PUZZLE 1"
-                binding.buttonPrevious.setBackgroundColor(Color.GRAY)
+                binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.grey))
                 binding.buttonPrevious.isClickable = false
+                binding.buttonNext.setBackgroundColor(resources.getColor(R.color.blue))
+                binding.buttonNext.isClickable = true
                 GridManagerObject.addRectangle(Point(0, 0), Point(3, 1))
                 GridManagerObject.addRectangle(Point(0, 2), Point(2, 1), stuck = true)
                 GridManagerObject.addRectangle(Point(0, 3), Point(1, 2))
@@ -99,6 +111,22 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 GridManagerObject.addRectangle(Point(5, 0), Point(1, 3))
                 GridManagerObject.addRectangle(Point(4, 3), Point(2, 1))
                 GridManagerObject.addRectangle(Point(4, 4), Point(1, 2))
+            }
+            2 -> {
+                currentPuzzleNumber = 2
+                binding.toolbarPlayTitle.text = "PUZZLE 2"
+                binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.blue))
+                binding.buttonPrevious.isClickable = true
+                binding.buttonNext.setBackgroundColor(resources.getColor(R.color.blue))
+                binding.buttonNext.isClickable = true
+            }
+            3 -> {
+                currentPuzzleNumber = 3
+                binding.toolbarPlayTitle.text = "PUZZLE 3"
+                binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.blue))
+                binding.buttonPrevious.isClickable = true
+                binding.buttonNext.setBackgroundColor(resources.getColor(R.color.grey))
+                binding.buttonNext.isClickable = false
             }
         }
     }
