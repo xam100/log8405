@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.unlock.com.example.unlock.Success
 import com.example.unlock.databinding.FragmentMenuBinding
 
 /**
@@ -31,6 +32,7 @@ private var _binding: FragmentMenuBinding? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // This will be removed once Pop Up is linked to "Win" state
         binding.buttonPopup.setOnClickListener{
             val popUpClass = Success()
             popUpClass.showPopupWindow(view)

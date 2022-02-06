@@ -1,4 +1,4 @@
-package com.example.unlock
+package com.example.unlock.com.example.unlock
 
 import android.content.Context
 import android.media.AudioManager
@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import com.example.unlock.R
 import java.io.IOException
 
 
@@ -35,14 +36,16 @@ class Success {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
         //Initialize the elements of our window, install the handler
-        val test2 = popupView.findViewById<TextView>(R.id.successtitle)
-        test2.setText(R.string.puzzlesuccess)
-        val buttonEdit = popupView.findViewById<Button>(R.id.btnSoundTest)
-        buttonEdit.setOnClickListener { //As an example, display the message
+        val popupMessage = popupView.findViewById<TextView>(R.id.successtitle)
+        popupMessage.setText(R.string.puzzlesuccess)
+        val playButton = popupView.findViewById<Button>(R.id.btnPlaySound)
+        playButton.setOnClickListener { //As an example, display the message
             playAudio(view)
-
         }
-
+        val pauseButton = popupView.findViewById<Button>(R.id.btnPauseSound)
+        pauseButton.setOnClickListener { //As an example, display the message
+            pauseAudio(view)
+        }
         //Handler for clicking on the inactive zone of the window
         popupView.setOnTouchListener { v, event -> //Close the window when clicked
             popupWindow.dismiss()
@@ -66,4 +69,15 @@ class Success {
 
         Toast.makeText(view.context, "Audio started playing", Toast.LENGTH_SHORT).show()
     }
+
+    private fun pauseAudio(view:View) {
+        try {
+            mediaPlayer!!.stop()
+            mediaPlayer!!.reset()
+        } catch(e: IOException) {
+        e.printStackTrace()
+        }
+        Toast.makeText(view.context, "Audio stopped", Toast.LENGTH_SHORT).show()
+    }
+
 }
