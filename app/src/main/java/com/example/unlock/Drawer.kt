@@ -10,13 +10,13 @@ import android.view.View
 
 class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
 
+        private val gridManager = GridManagerObject
         private val paint:Paint = Paint()
         init {
             paint.isFilterBitmap = true
             paint.isAntiAlias = true
-            paint.color = Color.parseColor("#FF3F51B5")
+            paint.color = Color.parseColor("#FF0000FF")
         }
-        private val gridManager = GridManagerObject
 
         private var touchDown: Boolean = false
         private var position: PointF = PointF(0f, 0f)

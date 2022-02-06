@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.unlock.databinding.FragmentPlayBinding
 
-
 /**
  * A simple [Fragment] subclass as the Play destination in the navigation.
  */
@@ -43,7 +42,6 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         loadPuzzle(currentPuzzleNumber)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -83,10 +81,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             //todo add condition to check that the the number of current moves is less that the current record and that it is indeed a record
             binding.currentReccord1.text = binding.currentMoves1.text.toString()
         }
-
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

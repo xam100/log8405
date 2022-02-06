@@ -1,9 +1,6 @@
 package com.example.unlock
 
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Point
-import android.graphics.PointF
+import android.graphics.*
 import androidx.core.graphics.minus
 import androidx.core.graphics.plus
 import androidx.lifecycle.LiveData
@@ -24,7 +21,6 @@ object GridManagerObject {
     private var grabbedPosition: PointF = PointF(0f, 0f)
     private var currentRectangle: Rectangle? = null
     private var actions: MutableList<GridCommand> =  ArrayList()
-
     private var rectangles: Array<Array<Rectangle?>> =
         Array(6){arrayOfNulls<Rectangle?>(6)}
 
@@ -229,7 +225,6 @@ object GridManagerObject {
             }
         }
     }
-
 
     private fun updateRectangle(gridIndex: Point,
                                 canvasPosition: PointF,
