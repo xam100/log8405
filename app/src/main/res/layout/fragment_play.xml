@@ -136,7 +136,7 @@
                 app:layout_constraintTop_toTopOf="@+id/reccordLabel" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/reccordMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -149,7 +149,8 @@
                 android:id="@+id/button_undo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/blue"
+                android:background="@{viewmodel.fresh ? @color/grey : @color/blue}"
+                android:clickable="@{!viewmodel.fresh}"
                 android:text="@string/undo"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -161,7 +162,8 @@
                 android:id="@+id/button_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/blue"
+                android:background="@{viewmodel.fresh ? @color/grey : @color/blue}"
+                android:clickable="@{!viewmodel.fresh}"
                 android:text="@string/reset"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"

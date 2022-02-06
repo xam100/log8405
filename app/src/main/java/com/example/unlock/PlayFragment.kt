@@ -76,7 +76,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
         binding.buttonReset.setOnClickListener {
             GridManagerObject.deleteActions()
-            loadPuzzle(2)
+            loadPuzzle(currentPuzzleNumber)
         }
 
         binding.buttonMockSetRecord.setOnClickListener {
@@ -97,8 +97,10 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
     private fun loadPuzzle(puzzleNumber: Int){
         when (puzzleNumber) {
             1 -> {
+                GridManagerObject.deleteActions()
                 currentPuzzleNumber = 1
                 binding.toolbarPlayTitle.text = "PUZZLE 1"
+                binding.reccordMin.text = "/15"
                 binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.grey))
                 binding.buttonPrevious.isClickable = false
                 binding.buttonNext.setBackgroundColor(resources.getColor(R.color.blue))
@@ -113,20 +115,40 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 GridManagerObject.addRectangle(Point(4, 4), Point(1, 2))
             }
             2 -> {
+                GridManagerObject.deleteActions()
                 currentPuzzleNumber = 2
                 binding.toolbarPlayTitle.text = "PUZZLE 2"
+                binding.reccordMin.text = "/17"
                 binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.blue))
                 binding.buttonPrevious.isClickable = true
                 binding.buttonNext.setBackgroundColor(resources.getColor(R.color.blue))
                 binding.buttonNext.isClickable = true
+                GridManagerObject.addRectangle(Point(0, 3), Point(2, 1))
+                GridManagerObject.addRectangle(Point(0, 2), Point(2, 1), stuck = true)
+                GridManagerObject.addRectangle(Point(1, 4), Point(1, 2))
+                GridManagerObject.addRectangle(Point(2, 1), Point(1, 2))
+                GridManagerObject.addRectangle(Point(2, 3), Point(1, 2))
+                GridManagerObject.addRectangle(Point(2, 5), Point(2, 1))
+                GridManagerObject.addRectangle(Point(3, 1), Point(1, 3))
+                GridManagerObject.addRectangle(Point(4, 1), Point(1, 3))
             }
             3 -> {
+                GridManagerObject.deleteActions()
                 currentPuzzleNumber = 3
                 binding.toolbarPlayTitle.text = "PUZZLE 3"
+                binding.reccordMin.text = "/15"
                 binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.blue))
                 binding.buttonPrevious.isClickable = true
                 binding.buttonNext.setBackgroundColor(resources.getColor(R.color.grey))
                 binding.buttonNext.isClickable = false
+                GridManagerObject.addRectangle(Point(0, 0), Point(1, 2))
+                GridManagerObject.addRectangle(Point(0, 2), Point(2, 1), stuck = true)
+                GridManagerObject.addRectangle(Point(0, 4), Point(3, 1))
+                GridManagerObject.addRectangle(Point(1, 0), Point(2, 1))
+                GridManagerObject.addRectangle(Point(2, 1), Point(1, 2))
+                GridManagerObject.addRectangle(Point(3, 0), Point(2, 1))
+                GridManagerObject.addRectangle(Point(3, 2), Point(1, 3))
+                GridManagerObject.addRectangle(Point(4, 2), Point(1, 3))
             }
         }
     }

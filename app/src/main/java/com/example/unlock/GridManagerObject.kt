@@ -16,6 +16,10 @@ object GridManagerObject {
     val test: LiveData<Int>
         get() = _moves
 
+    private val _fresh: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val test2: LiveData<Boolean>
+        get() = _fresh
+
     private var grabbed: Boolean = false
     private var grabbedPosition: PointF = PointF(0f, 0f)
     private var currentRectangle: Rectangle? = null
@@ -26,6 +30,7 @@ object GridManagerObject {
 
     init {
         _moves.value = 0
+        _fresh.value = true
     }
 
     fun undo() {
@@ -43,12 +48,14 @@ object GridManagerObject {
             action.exec(rectangles)
         }
         _moves.value = _moves.value!!.toInt() - 1
+        _fresh.value = _moves.value == 0
     }
 
     fun deleteActions(){
         rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
         actions.clear()
         _moves.value = 0
+        _fresh.value = true
     }
 
     private fun addCommand(position: Point,
@@ -61,6 +68,7 @@ object GridManagerObject {
 
         if(fromUser && rectangle != null) {
             _moves.value = _moves.value!!.toInt() + 1
+            _fresh.value = _moves.value == 0
         }
     }
 
