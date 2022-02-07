@@ -2,18 +2,18 @@
     <string name="app_name">unLock</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="menu_fragment_label">Main Menu</string>
-    <string name="about_fragment_label">About</string>
-    <string name="play1_fragment_label">Puzzle 1</string>
-    <string name="play2_fragment_label">Puzzle 2</string>
-    <string name="play3_fragment_label">Puzzle 3</string>
-    <string name="about">About</string>
-    <string name="play">Play</string>
-    <string name="exit">Exit</string>
+    <string name="menu_fragment_label">MAIN MENU</string>
+    <string name="about_fragment_label">ABOUT</string>
+    <string name="puzzle1ToolbarTittle">PUZZLE 1</string>
+    <string name="puzzle2ToolbarTittle">PUZZLE 2</string>
+    <string name="puzzle3ToolbarTittle">PUZZLE 3</string>
+    <string name="about">ABOUT</string>
+    <string name="play">PLAY</string>
+    <string name="exit">EXIT</string>
     <string name="next_game">Next</string>
     <string name="previous_game">Previous</string>
     <string name="home">Home</string>
-    <string name="puzzlesuccess">Success!</string>
+    <string name="textTitle">POPUP</string>
 
     <string name="moves">Moves:</string>
     <string name="current_moves">0</string>
@@ -25,7 +25,7 @@
     <string name="undo">undo</string>
 
     <string name="hello_menu_fragment">Welcome to unLock</string>
-    <string name="hello_about_fragment">Prenom Nom\nPrenom Nom\nPrenom Nom\nPrenom Nom</string>
+    <string name="hello_about_fragment">Maxim Pecherskiy\n Andrew Abdo\n Brando Tovar\n Estefan Vega</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

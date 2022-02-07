@@ -2,47 +2,24 @@ package com.example.unlock
 
 import android.content.Context
 import android.graphics.*
-import android.os.Bundle
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.example.unlock.databinding.FragmentBoardBinding
-import com.example.unlock.databinding.FragmentPlay1Binding
 
 //data class Position (var x: Float, var y: Float)
 
-class BoardFragment : Fragment() {
-    private var _binding: FragmentBoardBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = FragmentBoardBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }
-
-    class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
-
-        private val gridManager: GridManager = GridManager(PointF(1f, 1f))
+        private val gridManager = GridManagerObject
+        private val paint:Paint = Paint()
+        init {
+            paint.isFilterBitmap = true
+            paint.isAntiAlias = true
+            paint.color = Color.parseColor("#FF0000FF")
+        }
 
         private var touchDown: Boolean = false
         private var position: PointF = PointF(0f, 0f)
-
 
         override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
             super.onSizeChanged(w, h, oldw, oldh)
@@ -65,9 +42,10 @@ class BoardFragment : Fragment() {
             canvas?.drawColor(Color.GRAY)
 
             if (touchDown)
-                gridManager.moveTo(position, canvas)
+                gridManager.moveTo(position, canvas, paint)
             else
-                gridManager.redrawRectangles(canvas)
+                gridManager.redrawRectangles(canvas, paint)
+            invalidate()
         }
 
         override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -91,4 +69,4 @@ class BoardFragment : Fragment() {
             return true
         }
     }
-}
+

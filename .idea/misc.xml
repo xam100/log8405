@@ -7,30 +7,27 @@
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/drawable/ic_launcher_background.xml" value="0.42552083333333335" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/activity_main.xml" value="0.30480072463768115" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/content_main.xml" value="0.409375" />
-        <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_about.xml" value="0.30117753623188404" />
+        <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_about.xml" value="0.4" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_board.xml" value="0.264" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_first.xml" value="0.409375" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_menu.xml" value="0.30117753623188404" />
-        <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_play.xml" value="0.409375" />
+        <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_play.xml" value="0.4" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_play1.xml" value="0.4" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_play2.xml" value="0.409375" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_play3.xml" value="0.409375" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/fragment_second.xml" value="0.409375" />
+        <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/layout/popup_window.xml" value="0.4" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/menu/menu_alt.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/max/AndroidStudioProjects/unLock/app/src/main/res/menu/menu_main.xml" value="0.409375" />
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.465" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.465" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.485054347826087" />
-        <entry key="app/src/main/res/layout/content_main.xml" value="0.485054347826087" />
-        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.5010416666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_board.xml" value="0.23542600896860988" />
-        <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.485054347826087" />
+        <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_play.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/fragment_play1.xml" value="0.23542600896860988" />
         <entry key="app/src/main/res/layout/fragment_play2.xml" value="0.485054347826087" />
-        <entry key="app/src/main/res/layout/fragment_play3.xml" value="0.5421875" />
-        <entry key="app/src/main/res/layout/fragment_success.xml" value="0.5" />
-        <entry key="app/src/main/res/menu/menu_main.xml" value="0.6921875" />
-        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.465" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.1828125" />
       </map>
     </option>
   </component>

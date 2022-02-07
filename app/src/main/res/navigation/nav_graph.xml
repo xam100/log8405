@@ -16,10 +16,7 @@
             app:destination="@id/AboutFragment" />
         <action
             android:id="@+id/action_MenuFragment_to_play1Fragment"
-            app:destination="@id/play1Fragment" />
-        <action
-            android:id="@+id/action_MenuFragment_to_boardFragment"
-            app:destination="@id/boardFragment" />
+            app:destination="@id/playFragment" />
     </fragment>
     <fragment
         android:id="@+id/AboutFragment"
@@ -32,47 +29,12 @@
             app:destination="@id/MenuFragment" />
     </fragment>
     <fragment
-        android:id="@+id/play1Fragment"
-        android:name="com.example.unlock.Play1Fragment"
-        android:label="@string/play1_fragment_label"
-        tools:layout="@layout/fragment_play1" >
-        <action
-            android:id="@+id/action_play1Fragment_to_play2Fragment"
-            app:destination="@id/play2Fragment" />
+        android:id="@+id/playFragment"
+        android:name="com.example.unlock.PlayFragment"
+        android:label="@string/puzzle1ToolbarTittle"
+        tools:layout="@layout/fragment_play">
         <action
             android:id="@+id/action_play1Fragment_to_MenuFragment"
             app:destination="@id/MenuFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/play2Fragment"
-        android:name="com.example.unlock.Play2Fragment"
-        android:label="@string/play2_fragment_label"
-        tools:layout="@layout/fragment_play2">
-        <action
-            android:id="@+id/action_play2Fragment_to_play3Fragment"
-            app:destination="@id/play3Fragment" />
-        <action
-            android:id="@+id/action_play2Fragment_to_play1Fragment"
-            app:destination="@id/play1Fragment" />
-        <action
-            android:id="@+id/action_play2Fragment_to_MenuFragment"
-            app:destination="@id/MenuFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/play3Fragment"
-        android:name="com.example.unlock.Play3Fragment"
-        android:label="@string/play3_fragment_label"
-        tools:layout="@layout/fragment_play3">
-        <action
-            android:id="@+id/action_play3Fragment_to_play2Fragment"
-            app:destination="@id/play2Fragment" />
-        <action
-            android:id="@+id/action_play3Fragment_to_MenuFragment"
-            app:destination="@id/MenuFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/boardFragment"
-        android:name="com.example.unlock.BoardFragment"
-        android:label="fragment_board"
-        tools:layout="@layout/fragment_board" />
 </navigation>

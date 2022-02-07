@@ -3,11 +3,20 @@ package com.example.unlock
 import android.graphics.*
 import androidx.core.graphics.minus
 import androidx.core.graphics.plus
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlin.math.roundToInt
 
-class GridManager(var blockSize: PointF) {
+object GridManagerObject {
+    var blockSize: PointF = PointF(1f, 1f)
+    private val _moves: MutableLiveData<Int> = MutableLiveData<Int>()
+    val test: LiveData<Int>
+        get() = _moves
 
-    var moves: Int = 0
+    private val _fresh: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val test2: LiveData<Boolean>
+        get() = _fresh
+
     private var grabbed: Boolean = false
     private var grabbedPosition: PointF = PointF(0f, 0f)
     private var currentRectangle: Rectangle? = null
@@ -16,11 +25,16 @@ class GridManager(var blockSize: PointF) {
     private var rectangles: Array<Array<Rectangle?>> =
         Array(6){arrayOfNulls<Rectangle?>(6)}
 
-    fun undo() {
-        rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
+    init {
+        _moves.value = 0
+        _fresh.value = true
+    }
 
-        if (actions.count() < 1)
+    fun undo() {
+        if (actions.count() < 1 || _moves.value == 0)
             return
+
+        rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
 
         actions.pop()
 
@@ -30,8 +44,15 @@ class GridManager(var blockSize: PointF) {
         for (action in actions) {
             action.exec(rectangles)
         }
+        _moves.value = _moves.value!!.toInt() - 1
+        _fresh.value = _moves.value == 0
+    }
 
-        moves--
+    fun deleteActions(){
+        rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
+        actions.clear()
+        _moves.value = 0
+        _fresh.value = true
     }
 
     private fun addCommand(position: Point,
@@ -43,8 +64,8 @@ class GridManager(var blockSize: PointF) {
         actions += gridCommand
 
         if(fromUser && rectangle != null) {
-            moves++
-            println("moves" + moves)
+            _moves.value = _moves.value!!.toInt() + 1
+            _fresh.value = _moves.value == 0
         }
     }
 
@@ -103,7 +124,7 @@ class GridManager(var blockSize: PointF) {
                 indexY.coerceIn(0..maxY))
 
         if(rectangles[gridIndex.x][gridIndex.y] != null &&
-           rectangles[gridIndex.x][gridIndex.y]!!.gridIndex == gridIndex) {
+            rectangles[gridIndex.x][gridIndex.y]!!.gridIndex == gridIndex) {
             currentRectangle = null
             return
         }
