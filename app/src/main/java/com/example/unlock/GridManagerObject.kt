@@ -308,20 +308,15 @@ object GridManagerObject {
         }
 
         fun redraw(canvasPosition: PointF, canvas: Canvas?) {
-            canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y,
-                canvasPosition.x + canvasDimensions.x,
-                canvasPosition.y + canvasDimensions.y,50.0F, 50.0F, this.paint)
-            canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y,
-                canvasPosition.x + canvasDimensions.x,
-                canvasPosition.y + canvasDimensions.y,50.0F, 50.0F, this.strokePaint)
+            canvas?.drawRoundRect(canvasPosition.x + 2, canvasPosition.y + 2,
+                canvasPosition.x - 2 + canvasDimensions.x,
+                canvasPosition.y + canvasDimensions.y - 2,50.0F, 50.0F, this.paint)
         }
 
         fun draw(canvas: Canvas?) {
             //canvas?.drawRect(canvasPosition.x, canvasPosition.y, right, bottom, paint)
-            canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y, right, bottom,
+            canvas?.drawRoundRect(canvasPosition.x + 2, canvasPosition.y + 2, right - 2, bottom - 2,
                 50.0F, 50.0F, this.paint)
-            canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y, right, bottom,
-                50.0F, 50.0F, this.strokePaint)
         }
     }
 }
