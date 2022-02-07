@@ -126,7 +126,7 @@
             android:id="@+id/button_undo1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/blue"
+            android:background="#003F51B5"
             android:text="@string/undo"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

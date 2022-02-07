@@ -251,10 +251,22 @@ class GridManager(var blockSize: PointF) {
         private val blockSize: PointF = PointF(bSize.x, bSize.y)
 
         private val paint:Paint = Paint()
+        private val strokePaint:Paint = Paint()
 
         init {
             paint.isFilterBitmap = true
             paint.isAntiAlias = true
+            paint.color = Color.parseColor("#FF3F51B5")
+            strokePaint.isFilterBitmap = true
+            strokePaint.isAntiAlias = true
+            strokePaint.style = Paint.Style.STROKE
+            strokePaint.strokeWidth = 5f
+            strokePaint.color = Color.parseColor("#ff000000")
+        }
+        init {
+            paint.isFilterBitmap = true
+            paint.isAntiAlias = true
+
             if(stuck)
                 paint.color = Color.parseColor("#FFF00F00")
             else {
@@ -278,12 +290,17 @@ class GridManager(var blockSize: PointF) {
             canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y,
                 canvasPosition.x + canvasDimensions.x,
                 canvasPosition.y + canvasDimensions.y,50.0F, 50.0F, this.paint)
+            canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y,
+                canvasPosition.x + canvasDimensions.x,
+                canvasPosition.y + canvasDimensions.y,50.0F, 50.0F, this.strokePaint)
         }
 
         fun draw(canvas: Canvas?) {
             //canvas?.drawRect(canvasPosition.x, canvasPosition.y, right, bottom, paint)
             canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y, right, bottom,
                 50.0F, 50.0F, this.paint)
+            canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y, right, bottom,
+                50.0F, 50.0F, this.strokePaint)
         }
     }
 }
