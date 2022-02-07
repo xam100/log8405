@@ -272,17 +272,11 @@ object GridManagerObject {
         private val blockSize: PointF = PointF(bSize.x, bSize.y)
 
         private val paint:Paint = Paint()
-        private val strokePaint:Paint = Paint()
 
         init {
             paint.isFilterBitmap = true
             paint.isAntiAlias = true
             paint.color = Color.parseColor("#FF3F51B5")
-            strokePaint.isFilterBitmap = true
-            strokePaint.isAntiAlias = true
-            strokePaint.style = Paint.Style.STROKE
-            strokePaint.strokeWidth = 5f
-            strokePaint.color = Color.parseColor("#ff000000")
         }
         init {
             paint.isFilterBitmap = true
