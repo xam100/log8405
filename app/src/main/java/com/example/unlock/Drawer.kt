@@ -42,9 +42,9 @@ class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
             canvas?.drawColor(Color.GRAY)
 
             if (touchDown)
-                gridManager.moveTo(position, canvas, paint)
+                gridManager.moveTo(position, canvas)
             else
-                gridManager.redrawRectangles(canvas, paint)
+                gridManager.redrawRectangles(canvas)
             invalidate()
         }
 
