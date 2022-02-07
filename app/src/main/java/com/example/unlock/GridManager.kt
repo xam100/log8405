@@ -52,7 +52,7 @@ class GridManager(var blockSize: PointF) {
                      dimensions: Point,
                      stuck: Boolean = false,
                      fromUser: Boolean = false) {
-        val rectangle: Rectangle = Rectangle(position, dimensions, blockSize)
+        val rectangle: Rectangle = Rectangle(position, dimensions, blockSize, stuck)
         addCommand(position, dimensions, rectangle, fromUser)
     }
 
@@ -109,7 +109,7 @@ class GridManager(var blockSize: PointF) {
         }
 
         addCommand(currentRectangle!!.gridIndex, gridDimensions, null, fromUser = true)
-        addRectangle(gridIndex, gridDimensions, fromUser = true)
+        addRectangle(gridIndex, gridDimensions, fromUser = true, stuck = currentRectangle!!.stuck)
 
         currentRectangle = null
     }
@@ -182,7 +182,7 @@ class GridManager(var blockSize: PointF) {
         return currentRectangle!!.canvasPosition + translation
     }
 
-    fun moveTo(touchPosition: PointF, canvas: Canvas?, paint: Paint) {
+    fun moveTo(touchPosition: PointF, canvas: Canvas?) {
         var newCanvasPosition: PointF = PointF(0f, 0f)
 
         if (grabbed) {
@@ -193,15 +193,15 @@ class GridManager(var blockSize: PointF) {
 
         if (grabbed)
             updateRectangle(currentRectangle!!.gridIndex,
-                newCanvasPosition, canvas, paint)
+                newCanvasPosition, canvas)
         else
-            updateRectangle(Point(0, 0), PointF(0f, 0f), canvas, paint)
+            updateRectangle(Point(0, 0), PointF(0f, 0f), canvas)
     }
 
-    fun redrawRectangles(canvas: Canvas?, paint: Paint) {
+    fun redrawRectangles(canvas: Canvas?) {
         for (rows in rectangles) {
             for (rectangle in rows) {
-                rectangle?.draw(canvas, paint)
+                rectangle?.draw(canvas)
             }
         }
     }
@@ -209,16 +209,15 @@ class GridManager(var blockSize: PointF) {
 
     private fun updateRectangle(gridIndex: Point,
                                 canvasPosition: PointF,
-                                canvas: Canvas?,
-                                paint: Paint) {
+                                canvas: Canvas?) {
         for (row in rectangles) {
             for (rectangle in row) {
                 if ((rectangle?.gridIndex != gridIndex)) {
-                    rectangle?.draw(canvas, paint)
+                    rectangle?.draw(canvas)
                 }
             }
         }
-        rectangles[gridIndex.x][gridIndex.y]?.redraw(canvasPosition, canvas, paint)
+        rectangles[gridIndex.x][gridIndex.y]?.redraw(canvasPosition, canvas)
     }
 
     class GridCommand(private val position: Point,
@@ -247,9 +246,21 @@ class GridManager(var blockSize: PointF) {
 
     class Rectangle(val gridIndex: Point,
                     val gridDimensions: Point,
-                    bSize: PointF) {
+                    bSize: PointF, val stuck: Boolean) {
 
         private val blockSize: PointF = PointF(bSize.x, bSize.y)
+
+        private val paint:Paint = Paint()
+
+        init {
+            paint.isFilterBitmap = true
+            paint.isAntiAlias = true
+            if(stuck)
+                paint.color = Color.parseColor("#FFF00F00")
+            else {
+                paint.color = Color.parseColor("#FF3F51B5")
+            }
+        }
 
         val canvasDimensions: PointF = gridDimensions * blockSize
         var canvasPosition: PointF = gridIndex * blockSize
@@ -263,16 +274,16 @@ class GridManager(var blockSize: PointF) {
             bottom = canvasPosition.y + canvasDimensions.y
         }
 
-        fun redraw(canvasPosition: PointF, canvas: Canvas?, paint: Paint) {
+        fun redraw(canvasPosition: PointF, canvas: Canvas?) {
             canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y,
                 canvasPosition.x + canvasDimensions.x,
-                canvasPosition.y + canvasDimensions.y,50.0F, 50.0F, paint)
+                canvasPosition.y + canvasDimensions.y,50.0F, 50.0F, this.paint)
         }
 
-        fun draw(canvas: Canvas?, paint: Paint) {
+        fun draw(canvas: Canvas?) {
             //canvas?.drawRect(canvasPosition.x, canvasPosition.y, right, bottom, paint)
             canvas?.drawRoundRect(canvasPosition.x, canvasPosition.y, right, bottom,
-                50.0F, 50.0F, paint)
+                50.0F, 50.0F, this.paint)
         }
     }
 }

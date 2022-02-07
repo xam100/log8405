@@ -37,12 +37,7 @@ class BoardFragment : Fragment() {
     }
 
     class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
-        private val paint:Paint = Paint()
-        init {
-            paint.isFilterBitmap = true
-            paint.isAntiAlias = true
-            paint.color = Color.parseColor("#FF3F51B5")
-        }
+
         private val gridManager: GridManager = GridManager(PointF(1f, 1f))
 
         private var touchDown: Boolean = false
@@ -70,9 +65,9 @@ class BoardFragment : Fragment() {
             canvas?.drawColor(Color.GRAY)
 
             if (touchDown)
-                gridManager.moveTo(position, canvas, paint)
+                gridManager.moveTo(position, canvas)
             else
-                gridManager.redrawRectangles(canvas, paint)
+                gridManager.redrawRectangles(canvas)
         }
 
         override fun onTouchEvent(event: MotionEvent?): Boolean {
