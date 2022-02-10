@@ -110,6 +110,8 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
     private fun saveRecord(puzzleNumber: Int){
         when (puzzleNumber){
             1-> {
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                record1 = sharedPref!!.getInt(getString(R.string.record1_value_key), 1000)
                 if (GridManagerObject.moves.value!!.toInt() < record1){
                     record1 = GridManagerObject.moves.value!!.toInt() + 1
                     binding.currentRecord.text = record1.toString()
@@ -121,6 +123,8 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 }
             }
             2-> {
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                record2 = sharedPref!!.getInt(getString(R.string.record2_value_key), 1000)
                 if (GridManagerObject.moves.value!!.toInt() < record2){
                     record2 = GridManagerObject.moves.value!!.toInt() + 1
                     binding.currentRecord.text = record2.toString()
@@ -132,6 +136,8 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 }
             }
             3-> {
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                record3 = sharedPref!!.getInt(getString(R.string.record3_value_key), 1000)
                 if (GridManagerObject.moves.value!!.toInt() < record3){
                     record3 = GridManagerObject.moves.value!!.toInt() + 1
                     binding.currentRecord.text = record3.toString()
