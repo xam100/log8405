@@ -10,12 +10,14 @@ import kotlin.math.roundToInt
 object GridManagerObject {
     var blockSize: PointF = PointF(1f, 1f)
     private val _moves: MutableLiveData<Int> = MutableLiveData<Int>()
-    val test: LiveData<Int>
+    val moves: LiveData<Int>
         get() = _moves
 
     private val _fresh: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
-    val test2: LiveData<Boolean>
+    val fresh: LiveData<Boolean>
         get() = _fresh
+
+    var win: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     private var grabbed: Boolean = false
     private var grabbedPosition: PointF = PointF(0f, 0f)
@@ -132,6 +134,7 @@ object GridManagerObject {
         addCommand(currentRectangle!!.gridIndex, gridDimensions, null, fromUser = true)
         if (currentRectangle!!.stuck && gridIndex.x == 4){
             println("WIN!")
+            win.value = true
         }else if (currentRectangle!!.stuck){
             println("LOSE!")
         }
@@ -306,7 +309,7 @@ object GridManagerObject {
             bottom = canvasPosition.y + canvasDimensions.y
         }
 
-        val offset = 5
+        private val offset = 5
 
         fun redraw(canvasPosition: PointF, canvas: Canvas?) {
             canvas?.drawRoundRect(canvasPosition.x + offset, canvasPosition.y + offset,

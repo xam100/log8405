@@ -8,7 +8,9 @@ import android.view.*
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.unlock.com.example.unlock.Success
 import com.example.unlock.databinding.FragmentPlayBinding
 
 /**
@@ -46,6 +48,11 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewmodel?.win?.observe(viewLifecycleOwner, Observer {
+            val popUpClass = Success()
+            popUpClass.showPopupWindow(view)
+        })
 
         binding.buttonNext.setOnClickListener {
             when (currentPuzzleNumber){
