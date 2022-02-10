@@ -56,6 +56,7 @@ object GridManagerObject {
         actions.clear()
         _moves.value = 0
         _fresh.value = true
+        win.value = false
     }
 
     private fun addCommand(position: Point,

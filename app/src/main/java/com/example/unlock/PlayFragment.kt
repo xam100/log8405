@@ -3,6 +3,7 @@ package com.example.unlock
 import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -49,9 +50,24 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
         binding.viewmodel?.win?.observe(viewLifecycleOwner, Observer {
             if (it) {
+                println("it value:" + it)
                 val popUpClass = Success()
                 popUpClass.showPopupWindow(view)
                 saveRecord(currentPuzzleNumber)
+                val timer = object: CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+
+                    override fun onFinish() {
+                        when (currentPuzzleNumber){
+                            1 -> loadPuzzle(2)
+                            2 -> loadPuzzle(3)
+                            3 -> {
+                                GridManagerObject.deleteActions()
+                                loadPuzzle(3)
+                            }
+                        }
+                    }
+                }.start()
             }
         })
 
