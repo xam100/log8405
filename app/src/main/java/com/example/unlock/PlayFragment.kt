@@ -40,7 +40,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         _binding = FragmentPlayBinding.inflate(inflater, container, false)
 
         binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         loadPuzzle(currentPuzzleNumber)
         return binding.root
     }
