@@ -25,6 +25,10 @@
     <string name="reset">reset</string>
     <string name="undo">undo</string>
 
+    <string name="record1_value_key">record1</string>
+    <string name="record2_value_key">record2</string>
+    <string name="record3_value_key">record3</string>
+
     <string name="hello_menu_fragment">Welcome to unLock</string>
     <string name="hello_about_fragment">Maxim Pecherskiy\n Andrew Abdo\n Brando Tovar\n Estefan Vega</string>
     <!-- TODO: Remove or change this placeholder text -->

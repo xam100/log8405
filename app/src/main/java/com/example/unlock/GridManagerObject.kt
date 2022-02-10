@@ -30,6 +30,7 @@ object GridManagerObject {
     init {
         _moves.value = 0
         _fresh.value = true
+        win.value = false
     }
 
     fun undo() {
@@ -137,6 +138,7 @@ object GridManagerObject {
             win.value = true
         }else if (currentRectangle!!.stuck){
             println("LOSE!")
+            win.value = false
         }
         addRectangle(gridIndex, gridDimensions, fromUser = true, stuck = currentRectangle!!.stuck)
 

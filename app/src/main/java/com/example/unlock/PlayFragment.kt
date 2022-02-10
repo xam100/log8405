@@ -1,11 +1,9 @@
 package com.example.unlock
 
-import android.graphics.Color
+import android.content.Context
 import android.graphics.Point
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,6 +19,10 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
     private var _binding: FragmentPlayBinding? = null
     private val viewModel: MainViewModel by viewModels()
     private var currentPuzzleNumber: Int = 1
+    private var record1: Int = 1000
+    private var record2: Int = 1000
+    private var record3: Int = 1000
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,16 +30,12 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setHasOptionsMenu(true)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentPlayBinding.inflate(inflater, container, false)
 
         binding.viewmodel = viewModel
@@ -50,8 +48,11 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewmodel?.win?.observe(viewLifecycleOwner, Observer {
-            val popUpClass = Success()
-            popUpClass.showPopupWindow(view)
+            if (it) {
+                val popUpClass = Success()
+                popUpClass.showPopupWindow(view)
+                saveRecord(currentPuzzleNumber)
+            }
         })
 
         binding.buttonNext.setOnClickListener {
@@ -90,6 +91,45 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         _binding = null
     }
 
+    private fun saveRecord(puzzleNumber: Int){
+        when (puzzleNumber){
+            1-> {
+                if (GridManagerObject.moves.value!!.toInt() < record1){
+                    record1 = GridManagerObject.moves.value!!.toInt() + 1
+                    binding.currentRecord.text = record1.toString()
+                    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                    with (sharedPref!!.edit()) {
+                        putInt(getString(R.string.record1_value_key), record1)
+                        apply()
+                    }
+                }
+            }
+            2-> {
+                if (GridManagerObject.moves.value!!.toInt() < record2){
+                    record2 = GridManagerObject.moves.value!!.toInt() + 1
+                    binding.currentRecord.text = record2.toString()
+                    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                    with (sharedPref!!.edit()) {
+                        putInt(getString(R.string.record2_value_key), record2)
+                        apply()
+                    }
+                }
+            }
+            3-> {
+                if (GridManagerObject.moves.value!!.toInt() < record3){
+                    record3 = GridManagerObject.moves.value!!.toInt() + 1
+                    binding.currentRecord.text = record3.toString()
+                    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                    with (sharedPref!!.edit()) {
+                        putInt(getString(R.string.record3_value_key), record3)
+                        apply()
+                    }
+                }
+            }
+        }
+
+    }
+
     private fun loadPuzzle(puzzleNumber: Int){
         when (puzzleNumber) {
             1 -> {
@@ -109,6 +149,14 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 GridManagerObject.addRectangle(Point(5, 0), Point(1, 3))
                 GridManagerObject.addRectangle(Point(4, 3), Point(2, 1))
                 GridManagerObject.addRectangle(Point(4, 4), Point(1, 2))
+
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+                if (sharedPref.getInt(getString(R.string.record1_value_key), 1000) == 1000){
+                    binding.currentRecord.text = "--"
+                }
+                else{
+                    binding.currentRecord.text = sharedPref.getInt(getString(R.string.record1_value_key), 1000).toString()
+                }
             }
             2 -> {
                 GridManagerObject.deleteActions()
@@ -127,6 +175,14 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 GridManagerObject.addRectangle(Point(2, 5), Point(2, 1))
                 GridManagerObject.addRectangle(Point(3, 1), Point(1, 3))
                 GridManagerObject.addRectangle(Point(4, 1), Point(1, 3))
+
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+                if (sharedPref.getInt(getString(R.string.record2_value_key), 1000) == 1000){
+                    binding.currentRecord.text = "--"
+                }
+                else{
+                    binding.currentRecord.text = sharedPref.getInt(getString(R.string.record2_value_key), 1000).toString()
+                }
             }
             3 -> {
                 GridManagerObject.deleteActions()
@@ -145,6 +201,14 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                 GridManagerObject.addRectangle(Point(3, 0), Point(2, 1))
                 GridManagerObject.addRectangle(Point(3, 2), Point(1, 3))
                 GridManagerObject.addRectangle(Point(4, 2), Point(1, 3))
+
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+                if (sharedPref.getInt(getString(R.string.record3_value_key), 1000) == 1000){
+                    binding.currentRecord.text = "--"
+                }
+                else{
+                    binding.currentRecord.text = sharedPref.getInt(getString(R.string.record3_value_key), 1000).toString()
+                }
             }
         }
     }

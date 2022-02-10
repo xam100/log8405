@@ -114,11 +114,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/movesLabel" />
 
             <TextView
-                android:id="@+id/currentReccord1"
+                android:id="@+id/currentRecord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@string/current_record"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/reccordLabel"
                 app:layout_constraintTop_toTopOf="@+id/reccordLabel" />
@@ -130,7 +129,7 @@
                 android:layout_marginStart="5dp"
                 android:text="@string/move_15"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/currentReccord1"
+                app:layout_constraintStart_toEndOf="@+id/currentRecord"
                 app:layout_constraintTop_toTopOf="@+id/reccordLabel" />
 
             <Button
