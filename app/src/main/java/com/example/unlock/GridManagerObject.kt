@@ -130,6 +130,11 @@ object GridManagerObject {
         }
 
         addCommand(currentRectangle!!.gridIndex, gridDimensions, null, fromUser = true)
+        if (currentRectangle!!.stuck && gridIndex.x == 4){
+            println("WIN!")
+        }else if (currentRectangle!!.stuck){
+            println("LOSE!")
+        }
         addRectangle(gridIndex, gridDimensions, fromUser = true, stuck = currentRectangle!!.stuck)
 
         currentRectangle = null
@@ -301,15 +306,17 @@ object GridManagerObject {
             bottom = canvasPosition.y + canvasDimensions.y
         }
 
+        val offset = 5
+
         fun redraw(canvasPosition: PointF, canvas: Canvas?) {
-            canvas?.drawRoundRect(canvasPosition.x + 2, canvasPosition.y + 2,
-                canvasPosition.x - 2 + canvasDimensions.x,
-                canvasPosition.y + canvasDimensions.y - 2,50.0F, 50.0F, this.paint)
+            canvas?.drawRoundRect(canvasPosition.x + offset, canvasPosition.y + offset,
+                canvasPosition.x - offset + canvasDimensions.x,
+                canvasPosition.y + canvasDimensions.y - offset,50.0F, 50.0F, this.paint)
         }
 
         fun draw(canvas: Canvas?) {
             //canvas?.drawRect(canvasPosition.x, canvasPosition.y, right, bottom, paint)
-            canvas?.drawRoundRect(canvasPosition.x + 2, canvasPosition.y + 2, right - 2, bottom - 2,
+            canvas?.drawRoundRect(canvasPosition.x + offset, canvasPosition.y + offset, right - offset, bottom - offset,
                 50.0F, 50.0F, this.paint)
         }
     }

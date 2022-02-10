@@ -5,6 +5,7 @@ import android.graphics.Point
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -64,10 +65,6 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             findNavController().navigate(R.id.action_play1Fragment_to_MenuFragment)
         }
 
-        binding.buttonMockPlay.setOnClickListener {
-            //binding.currentMoves1.text = (binding.currentMoves1.text.toString().toInt()+1).toString()
-        }
-
         binding.buttonUndo.setOnClickListener {
             GridManagerObject.undo()
         }
@@ -77,10 +74,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             loadPuzzle(currentPuzzleNumber)
         }
 
-        binding.buttonMockSetRecord.setOnClickListener {
-            //todo add condition to check that the the number of current moves is less that the current record and that it is indeed a record
-            binding.currentReccord1.text = binding.currentMoves1.text.toString()
-        }
+
     }
 
     override fun onDestroyView() {
