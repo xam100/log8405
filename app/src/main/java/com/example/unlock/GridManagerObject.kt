@@ -122,6 +122,12 @@ object GridManagerObject {
         }
     }
 
+    /**
+     * @param canvasPosition desired position on the canvas for the rectangle
+     * @param gridDimensions dimensions of the rectangle on the grid
+     *
+     * @return the nearest gridIndex where its possible to put the rectangle
+     */
     private fun snapIntoPlace(canvasPosition: PointF, gridDimensions: Point): Point {
         val indexX: Int = (canvasPosition.x / blockSize.x).roundToInt()
         val indexY: Int = (canvasPosition.y / blockSize.y).roundToInt()
@@ -172,6 +178,15 @@ object GridManagerObject {
         currentRectangle = null
     }
 
+    /**
+     * @param array array of the row or columns (of the grid) where we want to find the nearest obstacle
+     * @param startIndex index in the array to start the search
+     * @param endIndex index in the array where to end the search
+     *
+     * @return index of the nearest obstacle
+     *
+     * Search in the positive way from startIndex till endIndex
+     */
     private fun getNextObstacle(array: Array<Rectangle?>, startIndex: Int, endIndex: Int): Int {
         var index: Int = 0
         for (i in startIndex..endIndex) {
@@ -184,6 +199,15 @@ object GridManagerObject {
         return index
     }
 
+    /**
+     * @param array array of the row or columns (of the grid) where we want to find the nearest obstacle
+     * @param startIndex index in the array to start the search
+     * @param endIndex index in the array where to end the search
+     *
+     * @return index of the nearest obstacle
+     *
+     * Search in the negative way from startIndex till endIndex
+     */
     private fun getPrevObstacle(array: Array<Rectangle?>, startIndex: Int, endIndex: Int): Int {
         var index: Int = 0
         for (i in startIndex downTo endIndex) {
@@ -196,6 +220,14 @@ object GridManagerObject {
         return index
     }
 
+    /**
+     * @param matrix the matrix to extract the column from
+     * @param col the column index in the matrix
+     *
+     * @return the column at the specified index
+     *
+     * Extracts a column from a matrix
+     */
     private fun getColumn(matrix: Array<Array<Rectangle?>>, col: Int):  Array<Rectangle?>{
         val column = arrayOfNulls<Rectangle?>(matrix.size)
 
@@ -206,6 +238,15 @@ object GridManagerObject {
         return column
     }
 
+    /**
+     * @param rectangle the rectangle to translate
+     * @param translation the translation vector of the rectangle
+     *
+     * @return the unidirectional translated position in the canvas
+     *
+     * Gets the correct unidirectional translation (x, 0) or (y, 0). Adds it to the current
+     * position of the rectangle and checks if there are obstacles then gets the legal position.
+     */
     private fun translateRectangle(rectangle: Rectangle?, translation: PointF): PointF {
         if (rectangle!!.gridDimensions.x >
             rectangle!!.gridDimensions.y) {
@@ -240,6 +281,13 @@ object GridManagerObject {
         return currentRectangle!!.canvasPosition + translation
     }
 
+    /**
+     * @param touchPosition current position of the finger
+     * @param canvas the canvas to draw the rectangles
+     *
+     * Translates the currently grabbed rectangle where the finger is currently touching
+     * and redraws the current rectangle to its new position.
+     */
     fun moveTo(touchPosition: PointF, canvas: Canvas?) {
         var newCanvasPosition: PointF = PointF(0f, 0f)
 
@@ -256,6 +304,11 @@ object GridManagerObject {
             updateRectangle(Point(0, 0), PointF(0f, 0f), canvas)
     }
 
+    /**
+     * @param canvas the canvas to draw the rectangles
+     *
+     * Draws all rectangles
+     */
     fun redrawRectangles(canvas: Canvas?) {
         for (rows in rectangles) {
             for (rectangle in rows) {
@@ -264,7 +317,14 @@ object GridManagerObject {
         }
     }
 
-
+    /**
+     * @param gridIndex the grid index of the rectangle to redraw elsewhere
+     * @param canvasPosition the canvas position where to redraw the rectale at gridIndex
+     * @param canvas the canvas where to draw the rectangles
+     *
+     * Draws all rectangles besides the one at the gridIndex and draws the current rectangle
+     * to its new position
+     */
     private fun updateRectangle(gridIndex: Point,
                                 canvasPosition: PointF,
                                 canvas: Canvas?) {
@@ -278,30 +338,56 @@ object GridManagerObject {
         rectangles[gridIndex.x][gridIndex.y]?.redraw(canvasPosition, canvas)
     }
 
-    class GridCommand(private val position: Point,
+    /**
+     * Represents the command implementing the command design pattern for the undo
+     *
+     * @param gridIndex the index in the matrix where to add or remove the rectangle
+     * @param dimensions the dimensions of the rectangle
+     * @param rectangle the rectangle to add (null to remove)
+     */
+    class GridCommand(private val gridIndex: Point,
                       private val dimensions: Point,
                       val rectangle: Rectangle?) {
 
 
+        /**
+         * @param rectangles the matrix of rectangles where to add or remove rectangle
+         *
+         * Adds or removes the current rectangle (null to remove) to the matrix in all
+         * in all the indexes that it takes with its dimensions
+         */
         private fun addRemoveRectangle(rectangles: Array<Array<Rectangle?>>) {
             if (dimensions.x > dimensions.y) {
                 val range : Int = dimensions.x - 1
                 for (i in 0..range) {
-                    rectangles[position.x + i][position.y] = rectangle
+                    rectangles[gridIndex.x + i][gridIndex.y] = rectangle
                 }
             } else {
                 val range : Int = dimensions.y - 1
                 for (i in 0..range) {
-                    rectangles[position.x][position.y + i] = rectangle
+                    rectangles[gridIndex.x][gridIndex.y + i] = rectangle
                 }
             }
         }
 
+        /**
+         * @param rectangles the matrix of rectangles where to add or remove rectangle
+         *
+         * The exec function of the command pattern to add or remove a rectangle
+         */
         fun exec(rectangles: Array<Array<Rectangle?>>) {
             addRemoveRectangle(rectangles)
         }
     }
 
+    /**
+     * Represents the rectangles that are added to the canvas
+     *
+     * @param gridIndex the current grid index of the rectangle
+     * @param gridDimensions the dimensions of the rectangle on the grid
+     * @param bSize the dimensions of a block in the canvas
+     * @param stuck boolean to know if its the stucked rectangle
+     */
     class Rectangle(val gridIndex: Point,
                     val gridDimensions: Point,
                     bSize: PointF, val stuck: Boolean) {
@@ -327,23 +413,35 @@ object GridManagerObject {
         private var right: Float = canvasPosition.x + canvasDimensions.x
         private var bottom: Float = canvasPosition.y + canvasDimensions.y
 
-        private fun update(newX: Float, newY: Float) {
-            canvasPosition.set(newX, newY)
-            right = canvasPosition.x + canvasDimensions.x
-            bottom = canvasPosition.y + canvasDimensions.y
-        }
-
         private val offset = 5
 
-        fun redraw(canvasPosition: PointF, canvas: Canvas?) {
-            canvas?.drawRoundRect(canvasPosition.x + offset, canvasPosition.y + offset,
-                canvasPosition.x - offset + canvasDimensions.x,
-                canvasPosition.y + canvasDimensions.y - offset,50.0F, 50.0F, this.paint)
+        /**
+         * @param newCanvasPosition the new position where to draw the rectangle
+         * @param canvas the canvas where to draw the rectangle
+         *
+         * Draws the rectangle to its new position while its moving
+         */
+        fun redraw(newCanvasPosition: PointF, canvas: Canvas?) {
+            canvas?.drawRoundRect(
+                newCanvasPosition.x + offset,
+                newCanvasPosition.y + offset,
+                newCanvasPosition.x - offset + canvasDimensions.x,
+                newCanvasPosition.y + canvasDimensions.y - offset,
+                50.0F, 50.0F, this.paint)
         }
 
+        /**
+         * @param canvas the canvas where to draw the rectangle
+         *
+         * Draws the rectangle to its position
+         */
         fun draw(canvas: Canvas?) {
             //canvas?.drawRect(canvasPosition.x, canvasPosition.y, right, bottom, paint)
-            canvas?.drawRoundRect(canvasPosition.x + offset, canvasPosition.y + offset, right - offset, bottom - offset,
+            canvas?.drawRoundRect(
+                canvasPosition.x + offset,
+                canvasPosition.y + offset,
+                right - offset,
+                bottom - offset,
                 50.0F, 50.0F, this.paint)
         }
     }
