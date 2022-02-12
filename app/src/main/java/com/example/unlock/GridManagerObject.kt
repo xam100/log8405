@@ -33,6 +33,10 @@ object GridManagerObject {
         win.value = false
     }
 
+    /**
+     * Undo last action with command design pattern
+     * pops last action from actions, the array of actions
+     */
     fun undo() {
         if (actions.count() < 1 || _moves.value == 0)
             return
@@ -51,6 +55,9 @@ object GridManagerObject {
         _fresh.value = _moves.value == 0
     }
 
+    /**
+     * Cleans all actions and removes all rectangles
+     */
     fun deleteActions(){
         rectangles = Array(6){arrayOfNulls<Rectangle?>(6)}
         actions.clear()
@@ -59,11 +66,20 @@ object GridManagerObject {
         win.value = false
     }
 
-    private fun addCommand(position: Point,
+    /**
+     * @param gridIndex index of the rectangle in the grid
+     * @param dimensions dimensions of the rectangle on the grid eg. 1x3
+     * @param rectangle the rectangle to add
+     * @param fromUser boolean to see if the command is added by user interaction
+     *
+     * Creates a command from a rectangle that we want to add to the canvas and grid
+     * and increments moves if the action was made by user interaction.
+     */
+    private fun addCommand(gridIndex: Point,
                            dimensions: Point,
                            rectangle: Rectangle?,
                            fromUser: Boolean = false) {
-        val gridCommand: GridCommand = GridCommand(position, dimensions, rectangle)
+        val gridCommand: GridCommand = GridCommand(gridIndex, dimensions, rectangle)
         gridCommand.exec(rectangles)
         actions += gridCommand
 
@@ -73,31 +89,28 @@ object GridManagerObject {
         }
     }
 
-    fun addRectangle(position: Point,
+    /**
+     * @param gridIndex index of the rectangle in the grid
+     * @param dimensions dimensions of the rectangle on the grid eg. 1x3
+     * @param stuck boolean to know if the added rectangle is the stucked one
+     * @param fromUser boolean to see if the command is added by user interaction
+     *
+     * Creates a rectangle with the correct parameters and calls addCommand
+     */
+    fun addRectangle(gridIndex: Point,
                      dimensions: Point,
                      stuck: Boolean = false,
                      fromUser: Boolean = false) {
-        val rectangle: Rectangle = Rectangle(position, dimensions, blockSize, stuck)
-        addCommand(position, dimensions, rectangle, fromUser)
+        val rectangle: Rectangle = Rectangle(gridIndex, dimensions, blockSize, stuck)
+        addCommand(gridIndex, dimensions, rectangle, fromUser)
     }
 
-    private fun addRemoveRectangle(position: Point,
-                                   dimensions: Point,
-                                   rectangle: Rectangle?,
-                                   rectangles: Array<Array<Rectangle?>>) {
-        if (dimensions.x > dimensions.y) {
-            val range : Int = dimensions.x - 1
-            for (i in 0..range) {
-                rectangles[position.x + i][position.y] = rectangle
-            }
-        } else {
-            val range : Int = dimensions.y - 1
-            for (i in 0..range) {
-                rectangles[position.x][position.y + i] = rectangle
-            }
-        }
-    }
-
+    /**
+     * @param touchPosition the touch position on the canvas when grabbing the rectangle
+     *
+     * Saves the grabbed position, gets the grid index from the touch position
+     * and sets the current rectangle to the rectangle on the grid (null if no rectangle)
+     */
     fun grab(touchPosition: PointF) {
         grabbedPosition.set(touchPosition)
 
@@ -109,6 +122,25 @@ object GridManagerObject {
         }
     }
 
+    private fun snapIntoPlace(canvasPosition: PointF, gridDimensions: Point): Point {
+        val indexX: Int = (canvasPosition.x / blockSize.x).roundToInt()
+        val indexY: Int = (canvasPosition.y / blockSize.y).roundToInt()
+
+        val maxX = 6 - gridDimensions.x
+        val maxY = 6 - gridDimensions.y
+
+        return Point(
+            indexX.coerceIn(0..maxX),
+            indexY.coerceIn(0..maxY)
+        )
+    }
+
+    /**
+     * @param touchPosition the touch position on the canvas when releasing the rectangle
+     *
+     * Removes the rectangle from its initial position in the grid. Adds the rectangle in
+     * the position where released.
+     */
     fun release(touchPosition: PointF) {
         if (currentRectangle == null)
             return
@@ -119,13 +151,7 @@ object GridManagerObject {
 
         val gridDimensions: Point = currentRectangle!!.gridDimensions
 
-        val indexX: Int = (canvasPosition.x / blockSize.x).roundToInt()
-        val indexY: Int = (canvasPosition.y / blockSize.y).roundToInt()
-        val maxX = 6 - gridDimensions.x
-        val maxY = 6 - gridDimensions.y
-        val gridIndex: Point =
-            Point(indexX.coerceIn(0..maxX),
-                indexY.coerceIn(0..maxY))
+        val gridIndex: Point = snapIntoPlace(canvasPosition, gridDimensions)
 
         if(rectangles[gridIndex.x][gridIndex.y] != null &&
             rectangles[gridIndex.x][gridIndex.y]!!.gridIndex == gridIndex) {
@@ -133,12 +159,12 @@ object GridManagerObject {
             return
         }
 
+        // Removes rectangle from its initial position (adding null rectangle)
         addCommand(currentRectangle!!.gridIndex, gridDimensions, null, fromUser = true)
+
         if (currentRectangle!!.stuck && gridIndex.x == 4){
-            println("WIN!")
             win.value = true
         }else if (currentRectangle!!.stuck){
-            println("LOSE!")
             win.value = false
         }
         addRectangle(gridIndex, gridDimensions, fromUser = true, stuck = currentRectangle!!.stuck)
@@ -287,11 +313,6 @@ object GridManagerObject {
         init {
             paint.isFilterBitmap = true
             paint.isAntiAlias = true
-            paint.color = Color.parseColor("#FF3F51B5")
-        }
-        init {
-            paint.isFilterBitmap = true
-            paint.isAntiAlias = true
 
             if(stuck)
                 paint.color = Color.parseColor("#FFF00F00")
@@ -300,7 +321,7 @@ object GridManagerObject {
             }
         }
 
-        val canvasDimensions: PointF = gridDimensions * blockSize
+        private val canvasDimensions: PointF = gridDimensions * blockSize
         var canvasPosition: PointF = gridIndex * blockSize
 
         private var right: Float = canvasPosition.x + canvasDimensions.x
