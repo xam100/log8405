@@ -21,7 +21,15 @@ class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
         private var touchDown: Boolean = false
         private var position: PointF = PointF(0f, 0f)
 
-        override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+    /**
+     * Initially draw the rectangles
+     *
+     * @param w width of rectangle in grid
+     * @param h height of rectangle in grid
+     * @param oldw old width of rectangle in grid
+     * @param oldh old height of rectangle in grid
+     */
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
             super.onSizeChanged(w, h, oldw, oldh)
 
             gridManager.blockSize =
@@ -36,7 +44,12 @@ class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
             gridManager.addRectangle(Point(4, 4), Point(1, 2))
         }
 
-        override fun draw(canvas: Canvas?) {
+    /**
+     * Draws our rectangles when we have movements.
+     *
+     * @param canvas canvas
+     */
+    override fun draw(canvas: Canvas?) {
             super.draw(canvas)
 
             canvas?.drawColor(Color.GRAY)
@@ -48,7 +61,12 @@ class Drawer(con: Context?, attr: AttributeSet?) : View(con, attr) {
             invalidate()
         }
 
-        override fun onTouchEvent(event: MotionEvent?): Boolean {
+    /**
+     * Respond to touch events. Here we are interested in events where the touch position changed.
+     *
+     * @param event MotionEvent reports input details from the touch screen.
+     */
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
             when (event!!.action) {
                 MotionEvent.ACTION_DOWN -> {
                     touchDown = true

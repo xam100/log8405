@@ -12,8 +12,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.unlock.databinding.FragmentPlayBinding
 
 /**
- * A simple [Fragment] subclass as the Play destination in the navigation.
- */
+* PlayFragment class:
+* controls the play fragment view
+* adds event listeners to buttons on its layout
+* edits text views based on data
+* loads corresponding puzzle data
+* and executes basic navigation logic
+*/
 class PlayFragment : Fragment(R.layout.fragment_play) {
 
     private var _binding: FragmentPlayBinding? = null
@@ -22,16 +27,16 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
     private var record1: Int = 1000
     private var record2: Int = 1000
     private var record3: Int = 1000
-
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
+    /**
+     * Instantiates the view and binding. Associates the viewModel for LiveData usage.
+     *
+     * @param inflater inflates the current layout
+     * @param container container of the inflated layout
+     * @param savedInstanceState bundle
+     * @return created view
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,14 +49,19 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         return binding.root
     }
 
+    /**
+     * Binds all pertinent view elements to listeners or observers.
+     *
+     * @param view view of the fragment
+     * @param savedInstanceState bundle
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewmodel?.win?.observe(viewLifecycleOwner, Observer {
             if (it) {
-                println("it value:" + it)
                 saveRecord(currentPuzzleNumber)
-                val popUpClass = Success()
+                val popUpClass = PopUp()
                 popUpClass.showPopupWindow(view)
                 val timer = object: CountDownTimer(3000, 1000) {
                     override fun onTick(p0: Long) {}
@@ -97,12 +107,20 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
     }
 
+    /**
+     * Clears the view and binding.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         GridManagerObject.deleteActions()
         _binding = null
     }
 
+    /**
+     * Saves runtime record to storage based key-value DB. Allows persistent storage of puzzle records
+     *
+     * @param puzzleNumber index of puzzle record to be saved
+     */
     private fun saveRecord(puzzleNumber: Int){
         when (puzzleNumber){
             1-> {
@@ -148,13 +166,18 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
 
     }
 
+    /**
+     * Loads the given puzzle and its data and parameters
+     *
+     * @param puzzleNumber index of puzzle record to be saved
+     */
     private fun loadPuzzle(puzzleNumber: Int){
         when (puzzleNumber) {
             1 -> {
                 GridManagerObject.deleteActions()
                 currentPuzzleNumber = 1
-                binding.toolbarPlayTitle.text = "PUZZLE 1"
-                binding.reccordMin.text = "/15"
+                binding.toolbarPlayTitle.text = getString(R.string.puzzle1ToolbarTittle)
+                binding.reccordMin.text = getString(R.string.move_15)
                 binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.grey))
                 binding.buttonPrevious.isClickable = false
                 binding.buttonNext.setBackgroundColor(resources.getColor(R.color.blue))
@@ -179,8 +202,8 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             2 -> {
                 GridManagerObject.deleteActions()
                 currentPuzzleNumber = 2
-                binding.toolbarPlayTitle.text = "PUZZLE 2"
-                binding.reccordMin.text = "/17"
+                binding.toolbarPlayTitle.text = getString(R.string.puzzle2ToolbarTittle)
+                binding.reccordMin.text = getString(R.string.move_17)
                 binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.blue))
                 binding.buttonPrevious.isClickable = true
                 binding.buttonNext.setBackgroundColor(resources.getColor(R.color.blue))
@@ -205,8 +228,8 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
             3 -> {
                 GridManagerObject.deleteActions()
                 currentPuzzleNumber = 3
-                binding.toolbarPlayTitle.text = "PUZZLE 3"
-                binding.reccordMin.text = "/15"
+                binding.toolbarPlayTitle.text = getString(R.string.puzzle3ToolbarTittle)
+                binding.reccordMin.text = getString(R.string.move_15)
                 binding.buttonPrevious.setBackgroundColor(resources.getColor(R.color.blue))
                 binding.buttonPrevious.isClickable = true
                 binding.buttonNext.setBackgroundColor(resources.getColor(R.color.grey))

@@ -10,15 +10,23 @@ import com.example.unlock.databinding.FragmentMenuBinding
 
 
 /**
- * A simple [Fragment] subclass as the default destination in the navigation.
+ * MenuFragment class:
+ * controls the about fragment view
+ * adds event listeners to buttons on its layout
  */
 class MenuFragment : Fragment() {
 
-private var _binding: FragmentMenuBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
+    /**
+     * Instantiates the view and binding.
+     *
+     * @param inflater inflates the current layout
+     * @param container container of the inflated layout
+     * @param savedInstanceState bundle
+     * @return created view
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +37,12 @@ private var _binding: FragmentMenuBinding? = null
 
     }
 
+    /**
+     * Binds all pertinent view elements to listeners or observers.
+     *
+     * @param view view of the fragment
+     * @param savedInstanceState bundle
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,8 +59,11 @@ private var _binding: FragmentMenuBinding? = null
         }
     }
 
-override fun onDestroyView() {
+    /**
+     * Clears the view and binding.
+     */
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        }
     }
-}

@@ -8,28 +8,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 
-class Success {
-    //PopupWindow display method
+/**
+ * PopUp class used to contain popup window parameters and routines
+ * Used in play fragment to show a success window
+ */
+class PopUp {
 
+    /**
+     * On a given view, shows the popup window with preconfigured parameters:
+     * layout.xml
+     * animation
+     * duration
+     * sound
+     *
+     * @param view View on which the popup window will be displayed
+     */
     fun showPopupWindow(view: View) {
 
-        //Create a View object yourself through inflater
         val inflater =
             view.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val popupView: View = inflater.inflate(R.layout.fragment_success, null)
 
-        //Specify the length and width through constants
+
         val width = LinearLayout.LayoutParams.MATCH_PARENT
         val height = LinearLayout.LayoutParams.MATCH_PARENT
+        val popupWindow = PopupWindow(popupView, width, height, true)
 
-        //Make Inactive Items Outside Of PopupWindow
-        val focusable = true
-
-        //Create a window with our parameters
-        val popupWindow = PopupWindow(popupView, width, height, focusable)
         popupWindow.animationStyle = R.style.Animation
-
-        //Set the location of the window on the screen
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
         val music: MediaPlayer = MediaPlayer.create(view.context, R.raw.impressive)
@@ -37,7 +42,6 @@ class Success {
 
         val timer = object: CountDownTimer(3000, 1000) {
             override fun onTick(p0: Long) {}
-
             override fun onFinish() {
                 popupWindow.dismiss()
             }
