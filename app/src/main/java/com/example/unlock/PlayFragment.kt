@@ -65,6 +65,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
                                 GridManagerObject.deleteActions()
                                 loadPuzzle(3)
                             }
+                            // popUpClass.closePopup()
                         }
                     }
                 }.start()

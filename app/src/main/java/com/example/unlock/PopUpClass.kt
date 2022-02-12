@@ -13,7 +13,7 @@ import java.io.IOException
 
 class Success {
     //PopupWindow display method
-    private var mediaPlayer : MediaPlayer ? = null
+    private var mp : MediaPlayer ? = null;
 
     fun showPopupWindow(view: View) {
 
@@ -54,15 +54,18 @@ class Success {
     }
 
     private fun playAudio(view: View) {
-        val audioUrl = "https://www.bensound.com/bensound-music/bensound-ukulele.mp3"
-        mediaPlayer = MediaPlayer()
-        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        // val audioUrl = "https://www.bensound.com/bensound-music/bensound-ukulele.mp3"
+        // mp = MediaPlayer()
+        // mp!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
 
         try{
-            mediaPlayer!!.setDataSource(audioUrl)
-            mediaPlayer!!.prepare()
-            mediaPlayer!!.start()
-
+            // mp!!.setDataSource(R.raw.crackkid)
+            // mediaPlayer!!.setDataSource(audioUrl)
+            if (mp == null) {
+                val mp = MediaPlayer.create(view.context, R.raw.crackkid)
+                // mp.prepare()
+                mp.start()
+            }
         } catch(e: IOException) {
             e.printStackTrace()
         }
@@ -72,12 +75,18 @@ class Success {
 
     private fun pauseAudio(view:View) {
         try {
-            mediaPlayer!!.stop()
-            mediaPlayer!!.reset()
+            if (mp != null) {
+                mp!!.stop()
+                mp!!.reset()
+            }
         } catch(e: IOException) {
-        e.printStackTrace()
+            e.printStackTrace()
         }
         Toast.makeText(view.context, "Audio stopped", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun closePopup() {
+        // popupWindow.dismiss
     }
 
 }
