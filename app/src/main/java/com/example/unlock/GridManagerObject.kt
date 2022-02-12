@@ -7,6 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlin.math.roundToInt
 
+/**
+ * Represents the game area where the rectangles are (6x6) grid.
+ */
 object GridManagerObject {
     var blockSize: PointF = PointF(1f, 1f)
     private val _moves: MutableLiveData<Int> = MutableLiveData<Int>()
