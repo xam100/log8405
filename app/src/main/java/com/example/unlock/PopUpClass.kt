@@ -1,19 +1,15 @@
-package com.example.unlock.com.example.unlock
+package com.example.unlock
 
 import android.content.Context
-import android.media.AudioManager
 import android.media.MediaPlayer
+import android.os.CountDownTimer
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import com.example.unlock.R
-import java.io.IOException
-
 
 class Success {
     //PopupWindow display method
-    private var mediaPlayer : MediaPlayer ? = null
 
     fun showPopupWindow(view: View) {
 
@@ -31,53 +27,21 @@ class Success {
 
         //Create a window with our parameters
         val popupWindow = PopupWindow(popupView, width, height, focusable)
+        popupWindow.animationStyle = R.style.Animation
 
         //Set the location of the window on the screen
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
-        //Initialize the elements of our window, install the handler
-        val popupMessage = popupView.findViewById<TextView>(R.id.successtitle)
-        popupMessage.setText(R.string.puzzlesuccess)
-        val playButton = popupView.findViewById<Button>(R.id.btnPlaySound)
-        playButton.setOnClickListener { //As an example, display the message
-            playAudio(view)
-        }
-        val pauseButton = popupView.findViewById<Button>(R.id.btnPauseSound)
-        pauseButton.setOnClickListener { //As an example, display the message
-            pauseAudio(view)
-        }
-        //Handler for clicking on the inactive zone of the window
-        popupView.setOnTouchListener { v, event -> //Close the window when clicked
-            popupWindow.dismiss()
-            true
-        }
-    }
+        val music: MediaPlayer = MediaPlayer.create(view.context, R.raw.impressive)
+        music.start()
 
-    private fun playAudio(view: View) {
-        val audioUrl = "https://www.bensound.com/bensound-music/bensound-ukulele.mp3"
-        mediaPlayer = MediaPlayer()
-        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        val timer = object: CountDownTimer(3000, 1000) {
+            override fun onTick(p0: Long) {}
 
-        try{
-            mediaPlayer!!.setDataSource(audioUrl)
-            mediaPlayer!!.prepare()
-            mediaPlayer!!.start()
-
-        } catch(e: IOException) {
-            e.printStackTrace()
-        }
-
-        Toast.makeText(view.context, "Audio started playing", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun pauseAudio(view:View) {
-        try {
-            mediaPlayer!!.stop()
-            mediaPlayer!!.reset()
-        } catch(e: IOException) {
-        e.printStackTrace()
-        }
-        Toast.makeText(view.context, "Audio stopped", Toast.LENGTH_SHORT).show()
+            override fun onFinish() {
+                popupWindow.dismiss()
+            }
+        }.start()
     }
 
 }
