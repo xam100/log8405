@@ -35,6 +35,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
      * @param inflater inflates the current layout
      * @param container container of the inflated layout
      * @param savedInstanceState bundle
+     * @return created view
      */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +61,7 @@ class PlayFragment : Fragment(R.layout.fragment_play) {
         binding.viewmodel?.win?.observe(viewLifecycleOwner, Observer {
             if (it) {
                 saveRecord(currentPuzzleNumber)
-                val popUpClass = Success()
+                val popUpClass = PopUp()
                 popUpClass.showPopupWindow(view)
                 val timer = object: CountDownTimer(3000, 1000) {
                     override fun onTick(p0: Long) {}
